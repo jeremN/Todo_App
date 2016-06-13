@@ -4,18 +4,21 @@ var domReady = function(callback) {
 
 domReady(function(){
 
+
 	//Show ToDo
 	function showTodo(){
 		var todos = getTodo();
 
 		var html = "<div class='todo-task'>";
 		for(i = 0; i < todos.length; i++){
-			html += "<h4>" + todos[i] + "</h4><button class='remove' id='" + i + "'> Delete Todo </button>";  
+			html += "<h4>" + todos[i].task_title + "</h4><button class='remove' id='" + todos[i].task_id + "'> Delete Todo </button> </br><p>" + todos[i].task_description + "</p><p>" + todos[i].task_date + "</p>";
 		};
 		html += "</div>";
 
 		document.getElementById("task-list").innerHTML = html;
 		console.log(todos);
+
+	
 	}
 
 	//get ToDo
@@ -33,26 +36,22 @@ domReady(function(){
 	function addTodo(){
 
 
-		//var description = document.getElementById("todo-Description").value;
+		var description = document.getElementById("todo-Description").value;
 		var title = document.getElementById("todo-Title").value;
-		//var date = document.getElementById("todo-Date").value;
+		var date = document.getElementById("todo-Date").value;
 
 		var id = new Date().getTime();
 
-		/*var task = [
+		task = {
 
-			id,
-			title, 
-			description, 
-			date
-		];*/
-
-		var task = title;
+			task_id : id,
+			task_title : title, 
+			task_description : description, 
+			task_date : date
+		};
 
 		var todos = getTodo();
 		todos.push(task);
-
-
 		localStorage.setItem("todo", JSON.stringify(todos));
 
 		showTodo();
@@ -64,9 +63,10 @@ domReady(function(){
 	function delTodo(){
 
 		var thisId = this.getAttribute("id");
+
 		var todos = getTodo();
 
-		todos.splice(id, 1);
+		todos.splice(thisId, 1);
 		localStorage.setItem("todo", JSON.stringify(todos));
 
 		showTodo();
@@ -76,7 +76,10 @@ domReady(function(){
 	}
 
 	document.getElementById("todo-form").addEventListener("submit", addTodo);
-	window.setTimeout(showTodo, 5000);
+	document.getElementsByClassName("remove").addEventListener("click", delTodo);
+
+	showTodo();
+	//window.setInterval(showTodo, 5000);
 	//localStorage.removeItem("todo");
 
 	/*localStorage
