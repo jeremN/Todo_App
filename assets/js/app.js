@@ -18,11 +18,10 @@ domReady(function(){
 		
 		var todos = getTodo();
 
-		var html = "<div class='todo-task'>";
+		var html = "";
 		for(i = 0; i < todos.length; i++){
-			html += "<h4>" + todos[i].task_title + "</h4><button class='remove' id='" + i + "'> Delete Todo </button><p>" + todos[i].task_description + "</p><p>" + todos[i].task_date + "</p>";
+			html += "<div class='todo-task'><h4>" + todos[i].task_title + "</h4><button class='complete btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-ok'></span></button><button class='remove btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-remove'></span></button><p>" + todos[i].task_description + "</p><p>" + todos[i].task_date + "</p></div>";
 		};
-		html += "</div>";
 
 		document.getElementById("task-list").innerHTML = html;
 		console.log(todos);
