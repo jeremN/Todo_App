@@ -20,7 +20,7 @@ domReady(function(){
 
 		var html = "";
 		for(i = 0; i < todos.length; i++){
-			html += "<div class='todo-task'><h4>" + todos[i].task_title + "</h4><button class='complete btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-ok'></span></button><button class='remove btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-remove'></span></button><p>" + todos[i].task_description + "</p><p>" + todos[i].task_date + "</p></div>";
+			html += "<div class='todo-task " + todos[i].task_code +"'><p class='date-item'>" + todos[i].task_date + "</p><div class='head'><h4>" + todos[i].task_title + "</h4><div class='button'><button class='complete btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-ok'></span></button><button class='remove btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-remove'></span></button></div></div><p>" + todos[i].task_description + "</p></div>";
 		};
 
 		document.getElementById("task-list").innerHTML = html;
@@ -29,6 +29,11 @@ domReady(function(){
 		var removeBtn = document.getElementsByClassName("remove");
 		for(i = 0; i < removeBtn.length; i++){
 			removeBtn[i].addEventListener("click", delTodo);
+		}
+
+		var completeBtn = document.getElementsByClassName("complete");
+		for(i = 0; i < completeBtn.length; i++ ){
+			completeBtn[i].addEventListener("click", taskComplete);
 		}
 	}
 
@@ -42,7 +47,8 @@ domReady(function(){
 
 			task_title : title, 
 			task_description : description, 
-			task_date : date
+			task_date : date, 
+			task_code : 0
 		};
 
 		var todos = getTodo();
@@ -60,6 +66,26 @@ domReady(function(){
 
 		var todos = getTodo();
 		todos.splice(thisId, 1);
+		localStorage.setItem("todo", JSON.stringify(todos));
+
+		showTodo();
+
+		return false;
+	}
+	/*TODO 
+	//show add panel
+	function showPanel(){
+	
+	}*/
+
+	function taskComplete(){
+		
+		this.className += "checked";
+
+		var i = this.getAttribute("id");
+
+		var todos = getTodo();
+		todos[i].task_code = 1;
 		localStorage.setItem("todo", JSON.stringify(todos));
 
 		showTodo();

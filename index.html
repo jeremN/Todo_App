@@ -22,24 +22,68 @@
   <body>
     
     <div class="container">
-      <div id="box" class="col-md-6 col-md-offset-3">
+      <div id="box" class="col-md-6 col-sm-12 col-md-offset-3">
         
-        <div id="head-box" class="row">
-          
-        </div>
-
-        <div id="task" class="row">
-          <h3>Pending</h3>
-          <div id="task-list">
+        <header id="head-box" class="row">
+          <div class="col-md-10 col-sm-6">
+            <h1>ToDo List</h1>
+              <div id="stat-box">
+                <div class="stat-item"><span class='glyphicon glyphicon-ok'></span><p>2</p></div>
+                <div class="stat-item"><span class='glyphicon glyphicon-hourglass'></span><p>2</p></div>
+              </div>
           </div>
+          <button class="btn btn-default col-md-2 col-sm-4"><span class="glyphicon glyphicon-plus"></span></button>
+        </header>
+        
+        <div class="row col-md-10 col-sm-12 col-md-offset-1"> 
+
+          <div id="task" class="row">
+            <h2>Task</h2>
+            <div id="task-list">
+            </div>
+          </div>
+
+          <div id="completed" class="row">
+            <h2>Completed</h2>
+            <div id="completed-list"> 
+              <div class='todo-task'>
+                <p class='date-item'>2016-06-14</p>
+                <div class='head'>
+                  <h4>completed task</h4>
+                  <div class='button'>
+                    <button class='complete btn btn-default' id="">
+                      <span class='glyphicon glyphicon-ok'></span>
+                    </button>
+                    <button class='remove btn btn-default' id="">
+                      <span class='glyphicon glyphicon-remove'></span>
+                    </button>
+                  </div>
+                </div>
+                <p>task complete !</p>
+              </div>
+              <div class='todo-task'>
+                <p class='date-item'>2016-06-14</p>
+                <div class='head'>
+                  <h4>completed task</h4>
+                  <div class='button'>
+                    <button class='complete btn btn-default' id="">
+                      <span class='glyphicon glyphicon-ok'></span>
+                    </button>
+                    <button class='remove btn btn-default' id="">
+                      <span class='glyphicon glyphicon-remove'></span>
+                    </button>
+                  </div>
+                </div>
+                <p>task complete !</p>
+              </div>
+
+            </div>
+          </div>
+
         </div>
 
-        <!--<div class="task-list" id="completed">
-          <h3>Completed</h3>
-        </div>-->
-
-        <div class="task-list row">
-          <h3>Add a task</h3>
+        <div class="task-form row col-md-10 col-sm-12 col-md-offset-1">
+          <h2>Add a task</h2>
 
           <form id="todo-form">
 
