@@ -6,8 +6,8 @@ domReady(function(){
 
 	function getTodo(){
 
-		var todos = new Array;
-		var todos_str = localStorage.getItem("todo");
+		var todos = new Array, 
+			todos_str = localStorage.getItem("todo");
 		if (todos_str != null){
 			todos = JSON.parse(todos_str);
 		}
@@ -18,13 +18,25 @@ domReady(function(){
 		
 		var todos = getTodo();
 
-		var html = "";
+		var pending ="", 
+			done = "";
+
 		for(i = 0; i < todos.length; i++){
-			html += "<div class='todo-task " + todos[i].task_code +"'><p class='date-item'>" + todos[i].task_date + "</p><div class='head'><h4>" + todos[i].task_title + "</h4><div class='button'><button class='complete btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-ok'></span></button><button class='remove btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-remove'></span></button></div></div><p>" + todos[i].task_description + "</p></div>";
+
+			if(todos[i].task_code === 0){
+
+				pending += "<div class='todo-task'><p class='date-item'>" + todos[i].task_date + "</p><div class='head'><h4>" + todos[i].task_title + "</h4><div class='button'><button class='complete btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-ok'></span></button><button class='remove btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-remove'></span></button></div></div><p>" + todos[i].task_description + "</p></div>";
+			}
+			else if(todos[i].task_code === 1){
+
+				done += "<div class='todo-task'><p class='date-item'>" + todos[i].task_date + "</p><div class='head'><h4>" + todos[i].task_title + "</h4><div class='button'><button class='complete checked btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-ok'></span></button><button class='remove btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-remove'></span></button></div></div><p>" + todos[i].task_description + "</p></div>";
+			}
 		};
 
-		document.getElementById("task-list").innerHTML = html;
-		console.log(todos);
+		document.getElementById("task-list").innerHTML = pending;
+		document.getElementById("completed-list").innerHTML = done;
+
+		//console.log(todos);
 
 		var removeBtn = document.getElementsByClassName("remove");
 		for(i = 0; i < removeBtn.length; i++){
@@ -35,6 +47,7 @@ domReady(function(){
 		for(i = 0; i < completeBtn.length; i++ ){
 			completeBtn[i].addEventListener("click", taskComplete);
 		}
+
 	}
 
 	function addTodo(){
@@ -80,8 +93,6 @@ domReady(function(){
 
 	function taskComplete(){
 		
-		this.className += "checked";
-
 		var i = this.getAttribute("id");
 
 		var todos = getTodo();

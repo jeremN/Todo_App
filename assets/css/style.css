@@ -45,6 +45,9 @@ h4{
 	float: right;
 	margin-left: 5px;
 }
+#task{
+	border-bottom: 2px dashed #59636d;
+}
 .todo-task{
 	margin: 20px 0 30px;
 }
@@ -79,11 +82,8 @@ h4{
 .todo-task .remove:hover{
 	color: #e1675a;
 }
-.todo-task .complete:hover{
+.todo-task .complete:hover, .todo-task .complete.checked{
 	color: #54c5a7;
-}
-.todo-task .complete .checked{
-	color: #54c5a7;	
 }
 .todo-task .date-item{
 	margin: 0 0 5px 2px;
@@ -93,4 +93,5 @@ h4{
 	float: right;
 }
 .task-form{
+	display: none;
 }
