@@ -8,9 +8,9 @@ domReady(function(){
 	function showTodo(){
 		var todos = getTodo();
 
-		var html = "<div>";
+		var html = "<div class='todo-task'>";
 		for(i = 0; i < todos.length; i++){
-			html += "<h4>" + todos[i] + "</h4>";
+			html += "<h4>" + todos[i] + "</h4><button class='remove' id='" + i + "'> Delete Todo </button>";  
 		};
 		html += "</div>";
 
@@ -33,21 +33,21 @@ domReady(function(){
 	function addTodo(){
 
 
-		var description = document.getElementById("todo-Description").value;
+		//var description = document.getElementById("todo-Description").value;
 		var title = document.getElementById("todo-Title").value;
-		var date = document.getElementById("todo-Date").value;
+		//var date = document.getElementById("todo-Date").value;
 
 		var id = new Date().getTime();
 
-		var task = [
+		/*var task = [
 
 			id,
 			title, 
 			description, 
 			date
-		];
+		];*/
 
-
+		var task = title;
 
 		var todos = getTodo();
 		todos.push(task);
@@ -61,12 +61,22 @@ domReady(function(){
 	}
 
 	//Delete ToDo
-	/*function delTodo(){
+	function delTodo(){
 
-	}*/
+		var thisId = this.getAttribute("id");
+		var todos = getTodo();
+
+		todos.splice(id, 1);
+		localStorage.setItem("todo", JSON.stringify(todos));
+
+		showTodo();
+
+		return false;
+
+	}
 
 	document.getElementById("todo-form").addEventListener("submit", addTodo);
-	window.setInterval(showTodo, 5000);
+	window.setTimeout(showTodo, 5000);
 	//localStorage.removeItem("todo");
 
 	/*localStorage
