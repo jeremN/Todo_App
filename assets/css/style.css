@@ -82,16 +82,42 @@ h4{
 .todo-task .remove:hover{
 	color: #e1675a;
 }
-.todo-task .complete:hover, .todo-task .complete.checked{
+.todo-task .complete:hover,
+.todo-task .complete.checked{
 	color: #54c5a7;
 }
 .todo-task .date-item{
 	margin: 0 0 5px 2px;
+	font-size: 12px;
 }
 .todo-task .button{
 	line-height: 40px;
 	float: right;
 }
+#task, #completed{
+}
 .task-form{
 	display: none;
+	position: absolute;
+	top: 89px;
+	background: #59636d;
+	padding: 0 15px 15px;
+}
+.task-form textarea{
+	min-height: 100px;
+	max-height: 250px;
+}
+.task-form .form-group, 
+.task-form textarea,
+input[type="text"],
+input[type="date"]{
+	max-width: 445px;
+}
+.task-form .btn-primary{
+	margin-top: 30px;
+	background: #22272d;
+	border: none;
+}
+.task-form .btn-primary:hover{
+	background: #363d45;
 }

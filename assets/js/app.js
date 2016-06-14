@@ -27,15 +27,19 @@ domReady(function(){
 
 				pending += "<div class='todo-task'><p class='date-item'>" + todos[i].task_date + "</p><div class='head'><h4>" + todos[i].task_title + "</h4><div class='button'><button class='complete btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-ok'></span></button><button class='remove btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-remove'></span></button></div></div><p>" + todos[i].task_description + "</p></div>";
 			}
-			else if(todos[i].task_code === 1){
+			else{
 
 				done += "<div class='todo-task'><p class='date-item'>" + todos[i].task_date + "</p><div class='head'><h4>" + todos[i].task_title + "</h4><div class='button'><button class='complete checked btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-ok'></span></button><button class='remove btn btn-default' id='" + i + "'><span class='glyphicon glyphicon-remove'></span></button></div></div><p>" + todos[i].task_description + "</p></div>";
 			}
 		};
 
+
 		document.getElementById("task-list").innerHTML = pending;
 		document.getElementById("completed-list").innerHTML = done;
 
+		var parent = document.getElementById("task-list").childNodes.length;
+		console.log(parent);
+		
 		//console.log(todos);
 
 		var removeBtn = document.getElementsByClassName("remove");
@@ -47,7 +51,6 @@ domReady(function(){
 		for(i = 0; i < completeBtn.length; i++ ){
 			completeBtn[i].addEventListener("click", taskComplete);
 		}
-
 	}
 
 	function addTodo(){
@@ -85,11 +88,15 @@ domReady(function(){
 
 		return false;
 	}
-	/*TODO 
 	//show add panel
 	function showPanel(){
-	
-	}*/
+		var btn = document.querySelector(".glyphicon-plus");
+		var close = btn.animate([
+			{transform: "rotate(0)"},
+			{transform: "rotate(45deg)"}
+			], 500);
+
+	}
 
 	function taskComplete(){
 		
@@ -103,6 +110,18 @@ domReady(function(){
 
 		return false;
 	}
+
+/*
+	function getCount(parent, children){
+		var actualCount = 0,
+		var children = parent.childNodes.length;
+
+		for(i = 0; i < children; i++){
+			actualCount ++;
+		}
+
+		return actualCount;
+	}*/
 
 	document.getElementById("todo-form").addEventListener("submit", addTodo);
 	showTodo();

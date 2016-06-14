@@ -24,6 +24,7 @@
     <div class="container">
       <div id="box" class="col-md-6 col-sm-12 col-md-offset-3">
         
+        <!--Header-->
         <header id="head-box" class="row">
           <div class="col-md-10 col-sm-6">
             <h1>ToDo List</h1>
@@ -34,81 +35,57 @@
           </div>
           <button class="btn btn-default col-md-2 col-sm-4"><span class="glyphicon glyphicon-plus"></span></button>
         </header>
+        <!--Header END-->
         
+        <!--Task-->
         <div class="row col-md-10 col-sm-12 col-md-offset-1"> 
 
           <div id="task" class="row">
             <h2>Task</h2>
-            <div id="task-list">
-            </div>
+            <div id="task-list"></div>
           </div>
 
           <div id="completed" class="row">
             <h2>Completed</h2>
-            <div id="completed-list"><!-- 
-              <div class='todo-task'>
-                <p class='date-item'>2016-06-14</p>
-                <div class='head'>
-                  <h4>completed task</h4>
-                  <div class='button'>
-                    <button class='complete btn btn-default' id="">
-                      <span class='glyphicon glyphicon-ok'></span>
-                    </button>
-                    <button class='remove btn btn-default' id="">
-                      <span class='glyphicon glyphicon-remove'></span>
-                    </button>
-                  </div>
-                </div>
-                <p>task complete !</p>
-              </div>
-              <div class='todo-task'>
-                <p class='date-item'>2016-06-14</p>
-                <div class='head'>
-                  <h4>completed task</h4>
-                  <div class='button'>
-                    <button class='complete btn btn-default' id="">
-                      <span class='glyphicon glyphicon-ok'></span>
-                    </button>
-                    <button class='remove btn btn-default' id="">
-                      <span class='glyphicon glyphicon-remove'></span>
-                    </button>
-                  </div>
-                </div>
-                <p>task complete !</p>
-              </div>
-
-            </div>-->
+            <div id="completed-list"></div>
           </div>
 
         </div>
+        <!--Task END-->
 
-        <div class="task-form row col-md-10 col-sm-12 col-md-offset-1">
-          <h2>Add a task</h2>
+        <!--Add task-->
+        <div class="task-form row col-md-12 col-sm-12">
 
-          <form id="todo-form">
+          <div class="row col-md-10 col-md-offset-1">
+            <h2>Add a task</h2>
 
-            <fieldset class="form-group">
-              <label for="title">Title</label>
-              <input id="todo-Title" class="form-control" name="title" type="text" required/>
-            </fieldset>
+            <form id="todo-form">
 
-            <fieldset class="form-group">
-              <label for="description">Description</label>
-              <textarea id="todo-Description" class="form-control" name="description" type="text"></textarea>
-            </fieldset>
+              <fieldset class="form-group">
+                <label for="title">Title</label>
+                <input id="todo-Title" class="form-control" name="title" type="text" required/>
+              </fieldset>
 
-            <fieldset class="form-group">
-              <label for="date">Date</label>
-              <input id="todo-Date" class="form-control" name="date" type="date" required/>
-            </fieldset>
+              <fieldset class="form-group">
+                <label for="description">Description</label>
+                <textarea id="todo-Description" class="form-control" name="description" type="text" row="3"></textarea>
+              </fieldset>
 
-            <input id="todo-submit" class="btn btn-primary" type="submit" value="Add ToDo" />
+              <fieldset class="form-group">
+                <label for="date">Date</label>
+                <input id="todo-Date" class="form-control" name="date" type="date" required/>
+              </fieldset>
 
-          </form>
+              <input id="todo-submit" class="btn btn-primary" type="submit" value="Add ToDo" />
 
+            </form>
+          </div>
         </div>
+        <!--Add task END-->
       </div>
+      <!--Box END-->
     </div>
+    <!--Container END-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
