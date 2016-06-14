@@ -16,9 +16,8 @@ domReady(function(){
 	
 	function showTodo(){
 		
-		var todos = getTodo();
-
-		var pending ="", 
+		var todos = getTodo(),
+			pending ="", 
 			done = "";
 
 		for(i = 0; i < todos.length; i++){
@@ -37,11 +36,15 @@ domReady(function(){
 		document.getElementById("task-list").innerHTML = pending;
 		document.getElementById("completed-list").innerHTML = done;
 
-		var parent = document.getElementById("task-list").childNodes.length;
-		console.log(parent);
+		//Count complete & pending elements
+		var parent1 = document.getElementById("task-list").childNodes.length,
+			parent2 = document.getElementById("completed-list").childNodes.length;
 		
-		//console.log(todos);
+		document.querySelector("#pending-count").innerHTML = parent1;
+		document.querySelector("#done-count").innerHTML = parent2;
+		
 
+		//Remove & complete button
 		var removeBtn = document.getElementsByClassName("remove");
 		for(i = 0; i < removeBtn.length; i++){
 			removeBtn[i].addEventListener("click", delTodo);
@@ -78,9 +81,9 @@ domReady(function(){
 
 	function delTodo(){
 
-		var thisId = this.getAttribute("id");
+		var thisId = this.getAttribute("id"), 
+			todos = getTodo();
 
-		var todos = getTodo();
 		todos.splice(thisId, 1);
 		localStorage.setItem("todo", JSON.stringify(todos));
 
@@ -88,21 +91,12 @@ domReady(function(){
 
 		return false;
 	}
-	//show add panel
-	function showPanel(){
-		var btn = document.querySelector(".glyphicon-plus");
-		var close = btn.animate([
-			{transform: "rotate(0)"},
-			{transform: "rotate(45deg)"}
-			], 500);
-
-	}
 
 	function taskComplete(){
 		
-		var i = this.getAttribute("id");
+		var i = this.getAttribute("id"),
+			todos = getTodo();
 
-		var todos = getTodo();
 		todos[i].task_code = 1;
 		localStorage.setItem("todo", JSON.stringify(todos));
 
@@ -111,28 +105,36 @@ domReady(function(){
 		return false;
 	}
 
-/*
-	function getCount(parent, children){
-		var actualCount = 0,
-		var children = parent.childNodes.length;
+	//Function found here : 
+	//http://snippetrepo.com/snippets/toggleclass-with-pure-javascript
+	function toggleClass(element, className){
+		
+	    if (!element || !className){
+	        return;
+	    }
 
-		for(i = 0; i < children; i++){
-			actualCount ++;
-		}
+	    var classString = element.className, nameIndex = classString.indexOf(className);
+	    if (nameIndex == -1) {
+	        classString += ' ' + className;
+	    }
+	    else {
+	        classString = classString.substr(0, nameIndex) + classString.substr(nameIndex+className.length);
+	    }
+	    element.className = classString;
+	}
 
-		return actualCount;
-	}*/
+
+	var addTask = document.getElementById("add-task");
+
+	addTask.addEventListener('click', function() {
+   			toggleClass(addTask, 'open');
+   			toggleClass(document.getElementById('add-form'), 'open');
+	});
 
 	document.getElementById("todo-form").addEventListener("submit", addTodo);
+
 	showTodo();
 
 	//window.setInterval(showTodo, 5000);
 	//localStorage.removeItem("todo");
-
-	/*localStorage reminder
-	Save localStorage.setItem("key", "value");
-	Get localStorage.getItem("key", "value");
-	Delete localStorage.removeItem("key");
-	*/
-
 });

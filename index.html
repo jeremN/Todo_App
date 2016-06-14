@@ -29,11 +29,11 @@
           <div class="col-md-10 col-sm-6">
             <h1>ToDo List</h1>
               <div id="stat-box">
-                <div class="stat-item"><span class='glyphicon glyphicon-ok'></span><p>2</p></div>
-                <div class="stat-item"><span class='glyphicon glyphicon-hourglass'></span><p>2</p></div>
+                <div class="stat-item"><span class='glyphicon glyphicon-ok'></span><p id="done-count"></p></div>
+                <div class="stat-item"><span class='glyphicon glyphicon-hourglass'></span><p id="pending-count"></p></div>
               </div>
           </div>
-          <button class="btn btn-default col-md-2 col-sm-4"><span class="glyphicon glyphicon-plus"></span></button>
+          <button id="add-task" class="btn btn-default col-md-2 col-sm-4"><span class="glyphicon glyphicon-plus"></span></button>
         </header>
         <!--Header END-->
         
@@ -54,7 +54,7 @@
         <!--Task END-->
 
         <!--Add task-->
-        <div class="task-form row col-md-12 col-sm-12">
+        <div id="add-form" class="task-form row col-md-12 col-sm-12">
 
           <div class="row col-md-10 col-md-offset-1">
             <h2>Add a task</h2>

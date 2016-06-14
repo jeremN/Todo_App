@@ -5,6 +5,7 @@ body{
 #box{
 	background: #363d45;
 	margin-top: 60px;
+	overflow: hidden;
 }
 h1{
 	margin-bottom: 5px;
@@ -13,18 +14,22 @@ h4{
 	margin: 0 0 0 10px;
 }
 #head-box{
+	position: relative;
+	z-index: 999;
 	background: #e1675a;
 	height: 89px;
 }
-#head-box button.btn-default{
+#add-task.btn-default{
 	background: #cb5c51;
 	height: 89px;
 	color: #FFF;
 	border: none;
 	border-radius: 0;
 }
-#head-box button .glyphicon{
+#add-task .glyphicon{
 	font-size: 20px;
+	transition: all 0.15s ease-in-out;
+	-webkit transition: all 0.15s ease-in-out;
 }
 .stat-item{
 	height: 20px;
@@ -94,14 +99,14 @@ h4{
 	line-height: 40px;
 	float: right;
 }
-#task, #completed{
-}
-.task-form{
-	display: none;
+#add-form{
 	position: absolute;
-	top: 89px;
+	z-index: 998;
+	top: -339px;
+	opacity: 0;
 	background: #59636d;
 	padding: 0 15px 15px;
+	transition: all 0.25s ease-in;
 }
 .task-form textarea{
 	min-height: 100px;
@@ -120,4 +125,12 @@ input[type="date"]{
 }
 .task-form .btn-primary:hover{
 	background: #363d45;
+}
+#add-task.open .glyphicon-plus{
+	transform: rotate(45deg);
+	-webkit transform: rotate(45deg);
+}
+#add-form.open{
+	top: 89px;
+	opacity: 1;
 }
