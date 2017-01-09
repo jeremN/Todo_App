@@ -48,7 +48,7 @@
         <!--Task-->
         <div class="row col-md-10 col-sm-12 col-md-offset-1" ng-show="todos.length"> 
 
-          <div id="task" class="row" ng-repeat="todo in todos">
+          <div id="task" class="row" ng-repeat="todo in todos track by $index| filter: search.todo.code">
             <h2>Task</h2>
             <div id="task-list">
               

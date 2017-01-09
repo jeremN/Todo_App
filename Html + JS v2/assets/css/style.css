@@ -1,0 +1,136 @@
+body{
+	background: #22272d;
+	color: #FFF;
+}
+#box{
+	background: #363d45;
+	margin-top: 60px;
+	overflow: hidden;
+}
+h1{
+	margin-bottom: 5px;
+}
+h4{
+	margin: 0 0 0 10px;
+}
+#head-box{
+	position: relative;
+	z-index: 999;
+	background: #e1675a;
+	height: 89px;
+}
+#add-task.btn-default{
+	background: #cb5c51;
+	height: 89px;
+	color: #FFF;
+	border: none;
+	border-radius: 0;
+}
+#add-task .glyphicon{
+	font-size: 20px;
+	transition: all 0.15s ease-in-out;
+	-webkit transition: all 0.15s ease-in-out;
+}
+.stat-item{
+	height: 20px;
+	padding: 0 10px;
+	float: left;
+	display: inline-block;
+	border-right: 1px solid #FFF;
+}
+.stat-item:last-child{
+	border: none;
+}
+.stat-item span{
+	float: left;
+}
+.stat-item p{
+	font-size: 14px;
+	font-weight: bold;
+	float: right;
+	margin-left: 5px;
+}
+#task{
+	border-bottom: 2px dashed #59636d;
+}
+.todo-task{
+	margin: 20px 0 30px;
+}
+.todo-task h4{
+	float: left;
+	line-height: 38px;
+}
+.todo-task .head{
+	width: 100%;
+	height: 40px;
+	background: #22272d;
+	border-radius: 2px;
+}
+.todo-task button, .todo-task button:hover{
+	background: transparent;
+	border: none;
+	color: #bcc5ca;
+}
+.todo-task button:nth-child(2){
+	margin-right: 15px;
+}
+.todo-task p:last-child{
+	min-height: 40px;
+	text-align: left;
+	color: #22272d;
+	background: #FFF;
+	margin: 0;
+	padding: 0 10px;
+	border-bottom-left-radius: 2px; 
+	border-bottom-right-radius: 2px; 
+}
+.todo-task .remove:hover{
+	color: #e1675a;
+}
+.todo-task .complete:hover,
+.todo-task .complete.checked{
+	color: #54c5a7;
+}
+.todo-task .date-item{
+	margin: 0 0 5px 2px;
+	font-size: 12px;
+}
+.todo-task .button{
+	line-height: 40px;
+	float: right;
+}
+#add-form{
+	position: absolute;
+	z-index: 998;
+	top: -339px;
+	opacity: 0;
+	background: #59636d;
+	padding: 0 15px 15px;
+	transition: all 0.25s ease-in;
+}
+.task-form textarea{
+	min-height: 100px;
+	max-height: 250px;
+}
+.task-form .form-group, 
+.task-form textarea,
+input[type="text"],
+input[type="date"]{
+	max-width: 445px;
+}
+.task-form .btn-primary{
+	margin-top: 30px;
+	background: #22272d;
+	border: none;
+}
+.task-form .btn-primary:hover{
+	background: #363d45;
+}
+#add-task.open .glyphicon-plus{
+	transform: rotate(45deg);
+	-webkit transform: rotate(45deg);
+}
+#add-form.open{
+	top: 89px;
+	opacity: 1;
+}
