@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Todo App - with Vue.js</title>
+
+    <!--Font-->
+    <link href="assets/bootstrap/fonts/glyphicons-halflings-regular.ttf">
+
+    <!-- Bootstrap -->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--My CSS-->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+  <body>
+    
+    <!--Container-->
+    <div id="todo" class="container">
+
+      <!--Add task-->
+      <div class="row">
+        
+        <form id="todo-form" class="panel col-md-10 col-md-offset-1">
+
+          <!--Select all todos-->
+          <fieldset class="form-group">
+            <label for="markAll">Select all todos</label>>
+            <input id="markAll" type="checkbox" v-bind:checked="allSelected" v-on:click="selectAll">
+          </fieldset>
+          <!--./Select all todos-->
+
+          <!--Task-->
+          <fieldset class="form-group">
+            <label for="todo-title">Task</label>
+            <input id="todo-title" class="form-control" type="text" name="title" v-model="newTodo">
+          </fieldset>
+          <!--./Task-->
+
+          <!--Date-->
+          <fieldset class="form-group">
+            <label for="todo-date">Date</label>
+            <input id="todo-date" class="form-control" type="date" name="date" v-model="newDate">
+          </fieldset>
+          <!--./Date-->
+
+          <!--Submit btn-->
+          <button id="todoSubmit" class="btn btn-primary" v-on:click="addTodo">
+            Add Task
+          </button>
+          <!--./Submit btn-->
+
+          <!--Clear todos btn-->
+          <button id="todoClear" class="btn btn-primary" v-on:click="clearList">
+            Clear list
+          </button>
+          <!--./Clear todos btn-->
+
+        </form>
+      </div>
+      <!--./Add task-->
+
+      <!--Task list-->
+      <div class="row">
+        <div class="list col-md-10 col-md-offset-1">
+          
+          <!--Todo item-->
+          <div class='item' v-for="todo in todos" v-bind:class="{ done: todo.checked }">
+            <p class='item-date'>{{ todo.date }}</p>
+            <div class='item-content'>
+              <input class='complete btn btn-default' v-model="todo.checked">
+              <h4>{{ todo.title }}</h4>
+
+              <!--Remove btn-->
+              <div class='item-buttons'>
+                <button class='remove btn btn-default' v-on:click="removeTodo(todo)">
+                  <span class='glyphicon glyphicon-remove'></span>
+                </button>
+              </div>
+              <!--./Remove btn-->
+            
+            </div>
+          </div>
+          <!--./Todo item-->
+
+        </div>
+      </div>
+      <!--./Task list-->
+
+    </div>
+    <!--./Container-->
+
+  <!--SCRIPT-->
+    <!--Js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!--Bootstrap-->
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    
+    <!--Vue.js-->
+    <script src="https://unpkg.com/vue"></script>
+    
+    <!--App-->
+    <script src="assets/js/app.js"></script>
+
+  </body>
+</html>
