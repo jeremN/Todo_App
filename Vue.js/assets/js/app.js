@@ -4,7 +4,14 @@ var todoStorage = {
 
 	get: function() {
 
-		var todos = JSON.parse( localStorage.getItem(storageKey) || '[]' );
+		var todos = [],
+			todos_str = localStorage.getItem(storageKey);
+
+		if ( todos_str != null) {
+
+			todos = JSON.parse(todos_str);
+
+		}
 
 		return todos;
 
@@ -34,6 +41,22 @@ new Vue({
 
 	},
 
+	watch: {
+
+		todos: {
+
+			handler: function(todos) {
+
+				todoStorage.save(todos);
+			},
+
+			//To detect nested values inside objects
+			deep: true
+
+		}
+
+	},
+
 	computed: {
 
 		allSelected: function() {
@@ -54,19 +77,20 @@ new Vue({
 
 		addTodo: function() {
 
-			var todo = this.newTodo;
+			var todo = this.newTodo.trim();
 			var tDate = this.newDate;
 
 			//if todo is not an empty string
 			if ( todo ) {
 
 				//Insert values in newTodo object
-				this.todoList = {
+				todoList = {
 
 					title: todo,
-					date: tDate
+					date: tDate,
+					checked: false
 
-				}
+				};
 
 				//Push an object containing the todo to tasklist array
 				this.todos.push(todoList);
@@ -76,12 +100,9 @@ new Vue({
 				this.newDate = "";
 
 				todoStorage.save(todos);
+				console.log(todos);
 			}
-			else {
 
-				return;
-			
-			}
 		},
 
 		removeTodo: function(todo) {
