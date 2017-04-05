@@ -79,7 +79,7 @@
           <div class='item' v-for="todo in todos" v-bind:class="{ done: todo.checked }">
             <p class='item-date'>{{ todo.date }}</p>
             <div class='item-content'>
-              <input class='complete btn btn-default' v-model="todo.checked">
+              <input type="checkbox" class='complete btn btn-default' v-model="todo.checked">
               <h4>{{ todo.title }}</h4>
 
               <!--Remove btn-->
@@ -97,6 +97,8 @@
         </div>
       </div>
       <!--./Task list-->
+      
+      <pre>{{ $data }}</pre>
 
     </div>
     <!--./Container-->
