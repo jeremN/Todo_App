@@ -1,25 +1,70 @@
-var storageKey = "todoApp";
+var storageKey;
 
-var todoStorage = {
+var lStorage = {
 
-	get: function() {
+	get: function(type) {
 
-		var todos = [],
-			todos_str = localStorage.getItem(storageKey);
+		console.log(type);
 
-		if ( todos_str != null) {
+		/*if (type === "todos") {
 
-			todos = JSON.parse(todos_str);
+			storageKey = ""+type+"App";
+			console.log(storageKey);
 
+			var todos = [],
+				todos_str = localStorage.getItem(storageKey);
+
+			if (todos_str != null) {
+
+				todos = JSON.parse(todos_str);
+
+			}
+
+			return todos;
+		}
+		else if (type === "notes") {
+
+			storageKey = ""+type+"App";
+
+			var notes = [],
+				notes_str = localStorage.getItem(storageKey);
+
+			if (todos != null) {
+
+				notes = JSON.parse(notes_str);
+
+			}
+
+			return notes;
+		}*/
+
+		var stored = type,
+			stored_str = localStorage.getItem(storageKey);
+
+		if (str != null) {
+
+			type = JSON.parse(str);
 		}
 
-		return todos;
+		return 
 
 	},
 
-	save: function(todos) {
+	save: function(type) {
 
-		localStorage.setItem( storageKey, JSON.stringify(todos) );
+		if (type === "todos") {
+
+			storageKey = ""+type+"App";
+			localStorage.setItem( storageKey, JSON.stringify(todos) );
+
+		}
+		else if (type === "notes") {
+
+			storageKey = "noteApp";
+			localStorage.setItem( storageKey, JSON.stringify(notes) );
+			
+		}
+
 
 	}
 
@@ -29,15 +74,18 @@ var todoStorage = {
 new Vue({
 
 	//Bind this instance to our container #todo-form
-	el: "#todo",
+	el: "#app",
 
 	//This is where we will register the values that hold the data for our application
 	data: {
 
-		todos: todoStorage.get(),
+		todos: lStorage.get("todos"),
+		notes: lStorage.get("notes"),
 		newTodo: "",
 		newDate: "",
-		todoList: {}
+		newNote: "",
+		todoList: {},
+		noteList: {}
 
 	},
 
@@ -47,7 +95,7 @@ new Vue({
 
 			handler: function(todos) {
 
-				todoStorage.save(todos);
+				lStorage.save(todos);
 			},
 
 			//To detect nested values inside objects
@@ -99,7 +147,7 @@ new Vue({
 				this.newTodo = "";
 				this.newDate = "";
 
-				todoStorage.save(todos);
+				lStorage.save(todos);
 				console.log(todos);
 			}
 
