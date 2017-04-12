@@ -29,74 +29,284 @@
     <!--Container-->
     <div id="todo" class="container">
 
-      <!--Add task-->
+      <!--Add task
       <div class="row">
         
         <form id="todo-form" class="panel col-md-10 col-md-offset-1">
 
-          <!--Select all todos-->
+          <!-Select all todos->
           <fieldset class="form-group">
             <label for="markAll">Select all todos</label>>
             <input id="markAll" type="checkbox" v-bind:checked="allSelected" v-on:click="selectAll">
           </fieldset>
-          <!--./Select all todos-->
+          <!-./Select all todos->
 
-          <!--Task-->
+          <!-Task->
           <fieldset class="form-group">
             <label for="todo-title">Task</label>
             <input id="todo-title" class="form-control" type="text" name="title" v-model="newTodo">
           </fieldset>
-          <!--./Task-->
-
-          <!--Date-->
+          <!-./Task->
+          <!-Date->
           <fieldset class="form-group">
             <label for="todo-date">Date</label>
             <input id="todo-date" class="form-control" type="date" name="date" v-model="newDate">
           </fieldset>
-          <!--./Date-->
+          <!-./Date->
 
-          <!--Submit btn-->
+          <!-Submit btn->
           <button id="todoSubmit" class="btn btn-primary" v-on:click="addTodo">
             Add Task
           </button>
-          <!--./Submit btn-->
+          <!-./Submit btn->
 
-          <!--Clear todos btn-->
+          <!-Clear todos btn->
           <button id="todoClear" class="btn btn-primary" v-on:click="clearList">
             Clear list
           </button>
-          <!--./Clear todos btn-->
+          <!-./Clear todos btn->
 
         </form>
       </div>
-      <!--./Add task-->
+      <!-./Add task-->
 
-      <!--Task list-->
+      <!--Task list
       <div class="row">
         <div class="list col-md-10 col-md-offset-1">
           
-          <!--Todo item-->
+          <!-Todo item->
           <div class='item' v-for="todo in todos" v-bind:class="{ done: todo.checked }">
             <p class='item-date'>{{ todo.date }}</p>
             <div class='item-content'>
               <input type="checkbox" class='complete btn btn-default' v-model="todo.checked">
               <h4>{{ todo.title }}</h4>
 
-              <!--Remove btn-->
+              <!-Remove btn->
               <div class='item-buttons'>
                 <button class='remove btn btn-default' v-on:click="removeTodo(todo)">
                   <span class='glyphicon glyphicon-remove'></span>
                 </button>
               </div>
-              <!--./Remove btn-->
+              <!-./Remove btn->
             
             </div>
           </div>
-          <!--./Todo item-->
+          <!-./Todo item->
 
         </div>
       </div>
-      <!--./Task list-->
+      <!-./Task list-->
+
+      <div id="box" class="col-md-6 col-sm-12 col-md-offset-3">
+        
+        <!--Header-->
+        <header id="head-box" class="row">
+          <div class="col-md-10 col-sm-8">
+            <h1>Accueil</h1>
+            <div id="stat-box">
+              <div class="stat-item">
+                <span class='glyphicon glyphicon-ok'></span>
+                <p id="done-count" class="counter"></p>
+              </div>
+              <div class="stat-item">
+                <span class='glyphicon glyphicon-hourglass'></span>
+                <p id="pending-count" class="counter"></p>
+              </div>
+            </div>
+          </div>
+          <button id="burger-menu" class="btn btn-default col-md-2 col-sm-4">
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+          </button>
+        </header>
+        <!--Header END-->
+
+        <!--Nav-->
+        <nav id="menu-list" class="row">
+          <ul class="col-md-10 col-sm-12 col-md-offset-1">
+            <li><a href="#add-form" title="Ajouter une tâche">Ajouter une tâche</a></li>
+            <li><a href="#category" title="Catégorie">Categorie</a></li>
+            <li><a href="#task" title="Liste des tâches">Liste des tâches</a></li>
+          </ul>
+        </nav>
+        <!--Nav END-->
+
+        <!--Add task Form-->
+        <div id="add-form" class="task-form row col-md-10 col-sm-12 col-md-offset-1">
+
+          <div class="row">
+            <h2>Ajouter une tâche</h2>
+
+            <form id="todo-form">
+
+              <fieldset class="form-group">
+                <label for="title">Tâche</label>
+                <input id="todo-Title" class="form-control" name="title" required>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <label for="time">Time</label>
+                <input id="todo-Time" class="form-control" name="time" type="time">
+              </fieldset>
+
+              <fieldset class="form-group">
+                <label for="date">Date</label>
+                <input id="todo-Date" class="form-control" name="date" type="date" required/>
+              </fieldset>
+
+              <div class="radiopills radiopills-container">
+
+                <div class="radiopills-purple">
+                    <input type="radio" 
+                    name="category" value="personnel" id="radio1" class="todo-Category" />
+                    <label class="todo-Category" value="Personnel" for="radio1">Personnel</label>
+                </div>
+                <div class="radiopills-blue">
+                    <input type="radio" 
+                    name="category" value="travail" id="radio2" class="todo-Category" checked/>
+                    <label class="todo-Category" value="Travail" for="radio2">Travail</label>
+                </div>
+                <div class="radiopills-green">
+                    <input type="radio" 
+                    name="category" value="maison" id="radio3" class="todo-Category" />
+                    <label class="todo-Category" value="Maison" for="radio3">Maison</label>
+                </div>
+                <div class="radiopills-yellow">
+                    <input type="radio" 
+                    name="category" value="loisir" id="radio4" class="todo-Category" />
+                    <label class="todo-Category" value="Loisir" for="radio4">Loisir</label>
+                </div>
+                <div class="radiopills-red">
+                    <input type="radio" 
+                    name="category" value="banque" id="radio5" />
+                    <label class="todo-Category" value="Banque" for="radio5">Banque</label>
+                </div>
+              </div>
+
+              <input id="todo-submit" class="btn btn-primary btn-submit" type="submit" value="Ajouter une tâche" />
+
+            </form>
+          </div>
+        </div>
+        <!--Add task form END-->
+
+        
+        <!--Task-->
+        <div id="task" class="row col-md-10 col-sm-12 col-md-offset-1"> 
+
+          <!--Pending task-->
+          <div id="task" class="row">
+            <h2>Tâche en cours</h2>
+            <div id="task-list">
+
+            </div>
+          </div>
+          <!--Pending task END-->
+
+          <!--Completed task END-->
+          <div id="completed" class="row">
+            <h2>Tâches terminées</h2>
+            <div id="completed-list">
+              
+            </div>
+          </div>
+          <!--Completed task END-->
+          
+          <div class="row">
+            <button id="add-task" class="btn btn-default col-md-2 col-sm-4">
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
+          </div>
+        </div>
+        <!--Task END-->
+
+        <!--Category-->
+        <div id="category" class="row col-md-10 col-sm-12 col-md-offset-1">
+
+          <div id="activ-cat" class="row">
+            
+          <h2>Catégories</h2>
+            <div id="task-category">
+          
+              <figure class="col-xs-5">
+                <a href="" title="">
+                  <span></span>
+                  <figcaption>
+                    <h4>
+                      <span class="glyphicon purple glyphicon-user"></span>
+                      <br>Personnel
+                    </h4>
+                    <p>54 tâches</p>
+                  </figcaption>
+                </a>
+              </figure>
+              <figure class="col-xs-5">
+                <a href="" title="">
+                  <span></span>
+                  <figcaption>
+                    <h4>
+                      <span class="glyphicon blue glyphicon-briefcase"></span>
+                      <br>Travail
+                    </h4>
+                    <p>54 tâches</p>
+                  </figcaption>
+                </a>
+              </figure>
+              <figure class="col-xs-5">
+                <a href="" title="">
+                  <span></span>
+                  <figcaption>
+                    <h4>
+                      <span class="glyphicon green glyphicon-home"></span>
+                      <br>Maison
+                    </h4>
+                    <p>54 tâches</p>
+                  </figcaption>
+                </a>
+              </figure>
+              <figure class="col-xs-5">
+                <a href="" title="">
+                  <span></span>
+                  <figcaption>
+                    <h4>
+                      <span class="glyphicon yellow glyphicon-tent"></span>
+                      <br>Loisir
+                    </h4>
+                    <p>54 tâches</p>
+                  </figcaption>
+                </a>
+              </figure>
+              <figure class="col-xs-5">
+                <a href="" title="">
+                  <span></span>
+                  <figcaption>
+                    <h4>
+                      <span class="glyphicon red glyphicon-euro"></span>
+                      <br>Banque
+                    </h4>
+                    <p>54 tâches</p>
+                  </figcaption>
+                </a>
+              </figure>
+              <figure class="col-xs-5 add-cat_button">
+                <a href="" title="">
+                  <span></span>
+                  <figcaption>
+                    <h4>
+                      <span class=" glyphicon glyphicon-plus"></span>
+                    </h4>
+                    <h5>Ajouter une catégorie</h5>
+                  </figcaption>
+                </a>
+              </figure>
+
+            </div>
+          </div>
+        </div>
+        <!--Category END-->
+
+      </div>
+      <!--Box END-->
+
       
       <pre>{{ $data }}</pre>
 

@@ -1,136 +1,399 @@
+/*FONT*/
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,700');
+
+/*STYLE*/
+html,
 body{
-	background: #22272d;
-	color: #FFF;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%;
+    color: #526080 ;
+    background: #f5f5f8;
 }
-#box{
-	background: #363d45;
-	margin-top: 60px;
-	overflow: hidden;
+
+h1,
+h2{
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
 }
-h1{
-	margin-bottom: 5px;
-}
+
 h4{
-	margin: 0 0 0 10px;
+    font-weight: 700;
 }
-#head-box{
-	position: relative;
-	z-index: 999;
-	background: #e1675a;
-	height: 89px;
+
+.form-control,
+.time-item,
+.date-item{
+    color: #b6bfcf;
 }
-#add-task.btn-default{
-	background: #cb5c51;
-	height: 89px;
-	color: #FFF;
-	border: none;
-	border-radius: 0;
+
+figure{
+    background: #fff;
 }
-#add-task .glyphicon{
-	font-size: 20px;
-	transition: all 0.15s ease-in-out;
-	-webkit transition: all 0.15s ease-in-out;
+
+input,
+textarea,
+.form-control{
+    color: #888;
+    background: none;
 }
-.stat-item{
-	height: 20px;
-	padding: 0 10px;
-	float: left;
-	display: inline-block;
-	border-right: 1px solid #FFF;
-}
-.stat-item:last-child{
-	border: none;
-}
-.stat-item span{
-	float: left;
-}
-.stat-item p{
-	font-size: 14px;
-	font-weight: bold;
-	float: right;
-	margin-left: 5px;
-}
-#task{
-	border-bottom: 2px dashed #59636d;
-}
-.todo-task{
-	margin: 20px 0 30px;
-}
-.todo-task h4{
-	float: left;
-	line-height: 38px;
-}
-.todo-task .head{
-	width: 100%;
-	height: 40px;
-	background: #22272d;
-	border-radius: 2px;
-}
-.todo-task button, .todo-task button:hover{
-	background: transparent;
-	border: none;
-	color: #bcc5ca;
-}
-.todo-task button:nth-child(2){
-	margin-right: 15px;
-}
-.todo-task p:last-child{
-	min-height: 40px;
-	text-align: left;
-	color: #22272d;
-	background: #FFF;
-	margin: 0;
-	padding: 0 10px;
-	border-bottom-left-radius: 2px; 
-	border-bottom-right-radius: 2px; 
-}
-.todo-task .remove:hover{
-	color: #e1675a;
-}
-.todo-task .complete:hover,
-.todo-task .complete.checked{
-	color: #54c5a7;
-}
-.todo-task .date-item{
-	margin: 0 0 5px 2px;
-	font-size: 12px;
-}
-.todo-task .button{
-	line-height: 40px;
-	float: right;
-}
+
+#category,
+#menu-list, 
 #add-form{
-	position: absolute;
-	z-index: 998;
-	top: -339px;
-	opacity: 0;
-	background: #59636d;
-	padding: 0 15px 15px;
-	transition: all 0.25s ease-in;
+    display: none;
 }
-.task-form textarea{
-	min-height: 100px;
-	max-height: 250px;
+
+#menu-list.open{
+    display: block;
 }
-.task-form .form-group, 
-.task-form textarea,
-input[type="text"],
-input[type="date"]{
-	max-width: 445px;
-}
-.task-form .btn-primary{
-	margin-top: 30px;
-	background: #22272d;
-	border: none;
-}
-.task-form .btn-primary:hover{
-	background: #363d45;
-}
-#add-task.open .glyphicon-plus{
-	transform: rotate(45deg);
-	-webkit transform: rotate(45deg);
-}
+
 #add-form.open{
-	top: 89px;
-	opacity: 1;
+    display: block;
+}
+
+#task{
+    display: block;
+}
+
+/*MENU BTN*/
+#add-task{
+    border-radius: 50%;
+    border: 0;
+    box-shadow: 6px 6px 14px -4px rgba(0, 0, 0, 0.2);
+    background: #42eed3;
+    width: 3rem;   
+    height: 3rem;
+    margin-top: 1em;
+}
+    
+    #add-task .glyphicon{
+        color: #fff;
+        background: none;
+    }
+
+/*MENU LIST*/
+#menu-list{
+    width: 100%;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0; 
+    text-align: center;
+}
+
+    #menu-list li{
+        width: 100%;
+        text-decoration: none;
+        list-style: none;
+        padding: 1em 2em;
+    }
+        #menu-list li > a{
+            text-decoration: none;
+        }
+
+/*
+RADIO INPUT STYLE
+*/
+.radiopills-container{
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 4.5em;
+    display:  block;
+}
+
+.radiopills > div{
+    float: left;
+}
+
+.radiopills label {
+    width: 100%;
+    font-weight: normal;
+    font-size: 0.7em;
+}
+
+    .radiopills input[type="radio"]:empty, 
+    .radiopills input[type="checkbox"]:empty {
+        display: none;
+    }
+
+        .radiopills input[type="radio"]:empty ~ label, 
+        .radiopills input[type="checkbox"]:empty ~ label {
+            position: relative;
+            line-height: 2.5em;
+            text-indent: 3.25em;
+            margin-top: 2em;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            transition: all ease-in 0.25s;
+        }
+
+            .radiopills input[type="radio"]:empty ~ label:before,
+            .radiopills input[type="checkbox"]:empty ~ label:before {
+                position: absolute;
+                display: block;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                content:'\25EF';
+                width: 2.5em;
+                color: #C2C2C2;
+                text-indent: .9em;
+            }
+
+    .radiopills input[type="radio"]:hover:not(:checked) ~ label, 
+    .radiopills input[type="checkbox"]:hover:not(:checked) ~ label {
+        color: #888;
+    }
+
+        .radiopills input[type="radio"]:hover:not(:checked) ~ label:before, 
+        .radiopills input[type="checkbox"]:hover:not(:checked) ~ label:before {
+            content:'\25CF';
+            text-indent: .9em;
+            color: #C2C2C2;
+        }
+
+    .radiopills input[type="radio"]:checked ~ label, 
+    .radiopills input[type="checkbox"]:checked ~ label {
+        color: #777;
+        box-shadow: 6px 6px 14px -4px rgba(0, 0, 0, 0.2);
+    }
+
+        .radiopills input[type="radio"]:checked ~ label:before, 
+        .radiopills input[type="checkbox"]:checked ~ label:before {
+            content:'\25CF';
+            text-indent: .9em;
+            color: #333;
+            background-color: #ccc;
+        }
+
+    .radiopills input[type="radio"]:focus ~ label:before, 
+    .radiopills input[type="checkbox"]:focus ~ label:before {
+        box-shadow: 0 0 0 3px #999;
+    }
+
+.radiopills-purple input[type="radio"]:checked ~ label, 
+.radiopills-purple input[type="checkbox"]:checked ~ label,
+.radiopills-purple input[type="radio"]:checked ~ label:before, 
+.radiopills-purple input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #beaaf1;
+}
+
+.radiopills-blue input[type="radio"]:checked ~ label, 
+.radiopills-blue input[type="checkbox"]:checked ~ label,
+.radiopills-blue input[type="radio"]:checked ~ label:before, 
+.radiopills-blue input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #90d0ff;
+}
+
+.radiopills-green input[type="radio"]:checked ~ label, 
+.radiopills-green input[type="checkbox"]:checked ~ label,
+.radiopills-green input[type="radio"]:checked ~ label:before, 
+.radiopills-green input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #98cd7a;
+}
+
+.radiopills-yellow input[type="radio"]:checked ~ label, 
+.radiopills-yellow input[type="checkbox"]:checked ~ label,
+.radiopills-yellow input[type="radio"]:checked ~ label:before, 
+.radiopills-yellow input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #fee489;
+}
+.radiopills-red input[type="radio"]:checked ~ label, 
+.radiopills-red input[type="checkbox"]:checked ~ label,
+.radiopills-red input[type="radio"]:checked ~ label:before, 
+.radiopills-red input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #f45e7d;
+}
+
+.radiopills-default input[type="radio"]:checked ~ label, 
+.radiopills-default input[type="checkbox"]:checked ~ label,
+.radiopills-default input[type="radio"]:checked ~ label:before, 
+.radiopills-default input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #5bc0de;
+}
+/*END RADIO INPUT STYLE*/
+
+.radiopills-purple,
+.radiopills-blue,
+.radiopills-green,
+.radiopills-red,
+.radiopills-yellow{
+    display: inline-block;
+    min-width: 6.5rem;
+}
+
+/*STAT*/
+.stat-item{
+    width: 50px;
+    float: left;
+    margin-right: 2em;
+}
+
+.counter{
+    float: right;
+}
+
+/*FORM*/
+textarea.form-control{
+    max-width: 450px;
+    max-height: 120px;
+    min-height: 34px;
+}
+
+.form-control{
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #ccc;
+    box-shadow: none;
+}
+
+    .form-control:focus{
+        border: 0;
+        border-bottom: 2px solid #337ab7;
+        box-shadow: none;    
+    }
+
+.btn-submit{
+    width: 100%;
+    height: 3rem;
+    margin-top: 4em;
+    background-color: #48eed3;
+    border: 0;
+    border-radius: 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all ease-in-out 0.35s;
+}
+
+    .btn-submit:hover,
+    .btn-submit:focus,
+    .btn-submit:active{
+        border: 0;
+        background: #fff;
+        color: #48eed3;
+    }
+
+#category .glyphicon{
+    width: 2.5rem;
+    height:  2.5rem;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    background: #f5f5f7;
+}
+
+    #category .glyphicon::before{
+        line-height: 2.5rem;
+        margin-right: 0.1rem;
+    }
+
+    #category .glyphicon.red{
+        background: #f45e7d;
+    }
+    #category .glyphicon.blue{
+        background: #90d0ff;
+    }
+    #category .glyphicon.yellow{
+        background: #fee489;
+    }    
+    #category .glyphicon.purple{
+        background: #beaaf1;
+    }    
+    #category .glyphicon.green{
+        background: #98cd7a;
+    }
+
+#category figure{
+    box-shadow: 6px 8px 14px 1px rgba(0, 0, 0, 0.2);
+    margin: 1em auto;
+    padding: 1em 0;
+}
+    #category figure:nth-child(2n){
+        margin-left: 16.6667%;
+    }
+
+    #category figure a{
+        color: #526080;
+    }
+        #category figure a:hover,
+        #category figure a:focus,
+        #category figure a:active{
+            text-decoration: none !important;
+        }
+
+    #category figure h4{
+        margin-bottom: 0.5em;
+    }
+
+    #category figcaption{
+        text-align: center;
+    }
+
+        #category figcaption span{
+            margin: 0.5em auto 3em;
+        }
+
+        #category figcaption p{
+            font-size: 0.75em;
+            color: #888;
+            margin-bottom: 1em;
+        }
+
+    #category .add-cat_button{
+        padding: 1em 0 2.4em;
+    }
+
+/*TASK*/
+.todo-task{
+    margin: 1.5em auto;
+    background: #fff;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.15);
+}
+
+    .todo-task .head h4{
+        float: left;
+        width: 75%;
+    }
+
+    .todo-task.loisir{
+        border-right: 2px solid #fee489;
+    }
+    .todo-task.personnel{
+        border-right: 2px solid #beaaf1;
+    }
+    .todo-task.travail{
+        border-right: 2px solid #90d0ff;
+    }
+    .todo-task.maison{
+        border-right: 2px solid #98cd7a;
+    }
+    .todo-task.default{
+        border-right: 2px solid #888;
+    }
+
+.button{
+    float: right;
+    width: 20%;
+}
+
+.btn.complete,
+.btn.remove{
+    border: 0;
+}
+
+/*ADD TASK*/
+#add-form{
+
 }
