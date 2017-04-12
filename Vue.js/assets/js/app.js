@@ -1,25 +1,43 @@
-var storageKey = "todoApp";
+var storageKey;
 
-var todoStorage = {
+var lStorage = {
 
-	get: function() {
+	setKey: function(key){
 
-		var todos = [],
-			todos_str = localStorage.getItem(storageKey);
+		if( key === "todos") {
 
-		if ( todos_str != null) {
+			storageKey = "todoApp";
 
-			todos = JSON.parse(todos_str);
+		}
+		else if (key === "notes") {
+
+			storageKey = "noteApp";
 
 		}
 
-		return todos;
+		return storageKey;
+	},
+	
+	get: function(el) {
+
+		lStorage.setKey(el);
+
+		var el = [],
+			this_str = localStorage.getItem(storageKey);
+
+		if ( this_str != null) {
+
+			el = JSON.parse(this_str);
+
+		}
+
+		return el;
 
 	},
 
-	save: function(todos) {
+	save: function(el) {
 
-		localStorage.setItem( storageKey, JSON.stringify(todos) );
+		localStorage.setItem( storageKey, JSON.stringify(el) );
 
 	}
 
@@ -29,15 +47,18 @@ var todoStorage = {
 new Vue({
 
 	//Bind this instance to our container #todo-form
-	el: "#todo",
+	el: "#app",
 
 	//This is where we will register the values that hold the data for our application
 	data: {
 
-		todos: todoStorage.get(),
+		todos: lStorage.get("todos"),
+		notes: lStorage.get("notes"),
 		newTodo: "",
 		newDate: "",
-		todoList: {}
+		newNote: "",
+		todoList: {},
+		noteList: {}
 
 	},
 
@@ -47,10 +68,21 @@ new Vue({
 
 			handler: function(todos) {
 
-				todoStorage.save(todos);
+				lStorage.save(todos);
 			},
 
 			//To detect nested values inside objects
+			deep: true
+
+		},
+
+		notes: {
+
+			handler: function(notes) {
+
+				lStorage.save(notes);
+			},
+
 			deep: true
 
 		}
@@ -81,7 +113,7 @@ new Vue({
 			var tDate = this.newDate;
 
 			//if todo is not an empty string
-			if ( todo ) {
+			if (todo) {
 
 				//Insert values in newTodo object
 				todoList = {
@@ -99,10 +131,30 @@ new Vue({
 				this.newTodo = "";
 				this.newDate = "";
 
-				todoStorage.save(todos);
-				console.log(todos);
+				lStorage.save(todos);
+
 			}
 
+		},
+
+		addNote: function(){
+
+			var note = this.newNote;
+
+			if (note) {
+
+				noteList = {
+
+					title: note,
+					checked: false
+				};
+
+				this.notes.push(noteList);
+
+				this.newNote = "";
+
+				lStorage.save(notes);
+			}
 		},
 
 		removeTodo: function(todo) {
@@ -113,10 +165,19 @@ new Vue({
 
 		},
 
+		removeNote: function(note) {
+
+			//Grab the index of this task and use splice() array method to delete it from the array
+			var index = this.notes.indexOf(note);
+			this.notes.splice( index, 1 );
+
+		},
+
 		clearList: function() {
 
 			//Setting todoList to an empty array clears the whole list
 			this.todos = [];
+			this.notes = [];
 
 		},
 
