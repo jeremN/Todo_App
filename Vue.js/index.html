@@ -139,18 +139,18 @@
             <form id="todo-form">
 
               <fieldset class="form-group">
-                <label for="title">Tâche</label>
-                <input id="todo-Title" class="form-control" name="title" required>
+                <label for="markAll">Select all todos</label>
+                <input id="markAll" type="checkbox" v-bind:checked="allSelected" v-on:click="selectAll">
               </fieldset>
 
               <fieldset class="form-group">
-                <label for="time">Time</label>
-                <input id="todo-Time" class="form-control" name="time" type="time">
+                <label for="title">Task</label>
+                <input id="todo-Title" class="form-control" name="title" v-model="newTodo" required>
               </fieldset>
 
               <fieldset class="form-group">
                 <label for="date">Date</label>
-                <input id="todo-Date" class="form-control" name="date" type="date" required/>
+                <input id="todo-Date" class="form-control" name="date" type="date" v-model="newDate"/>
               </fieldset>
 
               <div class="radiopills radiopills-container">
@@ -182,7 +182,7 @@
                 </div>
               </div>
 
-              <input id="todo-submit" class="btn btn-primary btn-submit" type="submit" value="Ajouter une tâche" />
+              <input id="todo-submit" class="btn btn-primary btn-submit" type="submit" value="Ajouter une tâche" v-on:click="addTodo"/>
 
             </form>
           </div>
@@ -198,18 +198,28 @@
             <h2>Tâche en cours</h2>
             <div id="task-list">
 
+              <!--Todo item-->
+              <div class='todo-task personnal' v-for="todo in todos" v-bind:class="{ done: todo.checked }">
+                <p class='item-date'>{{ todo.date }}</p>
+                <div class='head'>
+                  <input type="checkbox" class='complete btn btn-default' v-model="todo.checked">
+                  <h4>{{ todo.title }}</h4>
+
+                  <!--Remove btn-->
+                  <div class='button'>
+                    <button class='remove btn btn-default' v-on:click="removeTodo(todo)">
+                      <span class='glyphicon glyphicon-remove'></span>
+                    </button>
+                  </div>
+                  <!--./Remove btn-->
+                
+                </div>
+              </div>
+              <!--./Todo item-->
+
             </div>
           </div>
           <!--Pending task END-->
-
-          <!--Completed task END-->
-          <div id="completed" class="row">
-            <h2>Tâches terminées</h2>
-            <div id="completed-list">
-              
-            </div>
-          </div>
-          <!--Completed task END-->
           
           <div class="row">
             <button id="add-task" class="btn btn-default col-md-2 col-sm-4">

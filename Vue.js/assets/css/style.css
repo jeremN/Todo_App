@@ -41,8 +41,8 @@ textarea,
 }
 
 #category,
-#menu-list, 
-#add-form{
+#menu-list 
+/*#add-form*/{
     display: none;
 }
 

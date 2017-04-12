@@ -1,26 +1,8 @@
-var storageKey;
+var storageKey = "todoApp";
 
 var lStorage = {
-
-	setKey: function(key){
-
-		if( key === "todos") {
-
-			storageKey = "todoApp";
-
-		}
-		else if (key === "notes") {
-
-			storageKey = "noteApp";
-
-		}
-
-		return storageKey;
-	},
 	
 	get: function(el) {
-
-		lStorage.setKey(el);
 
 		var el = [],
 			this_str = localStorage.getItem(storageKey);
@@ -47,18 +29,16 @@ var lStorage = {
 new Vue({
 
 	//Bind this instance to our container #todo-form
-	el: "#app",
+	el: "#todo",
 
 	//This is where we will register the values that hold the data for our application
 	data: {
 
 		todos: lStorage.get("todos"),
-		notes: lStorage.get("notes"),
 		newTodo: "",
 		newDate: "",
-		newNote: "",
-		todoList: {},
-		noteList: {}
+		newCat: "",
+		todoList: {}
 
 	},
 
@@ -72,17 +52,6 @@ new Vue({
 			},
 
 			//To detect nested values inside objects
-			deep: true
-
-		},
-
-		notes: {
-
-			handler: function(notes) {
-
-				lStorage.save(notes);
-			},
-
 			deep: true
 
 		}
@@ -111,6 +80,7 @@ new Vue({
 
 			var todo = this.newTodo.trim();
 			var tDate = this.newDate;
+			var tCat = this.newCat.trim();
 
 			//if todo is not an empty string
 			if (todo) {
@@ -120,6 +90,7 @@ new Vue({
 
 					title: todo,
 					date: tDate,
+					category: tCat,
 					checked: false
 
 				};
@@ -130,31 +101,12 @@ new Vue({
 				//Reset newTodo to an empty string, so the input field is cleared
 				this.newTodo = "";
 				this.newDate = "";
+				this.newCat = "";
 
 				lStorage.save(todos);
 
 			}
 
-		},
-
-		addNote: function(){
-
-			var note = this.newNote;
-
-			if (note) {
-
-				noteList = {
-
-					title: note,
-					checked: false
-				};
-
-				this.notes.push(noteList);
-
-				this.newNote = "";
-
-				lStorage.save(notes);
-			}
 		},
 
 		removeTodo: function(todo) {
@@ -165,19 +117,10 @@ new Vue({
 
 		},
 
-		removeNote: function(note) {
-
-			//Grab the index of this task and use splice() array method to delete it from the array
-			var index = this.notes.indexOf(note);
-			this.notes.splice( index, 1 );
-
-		},
-
 		clearList: function() {
 
 			//Setting todoList to an empty array clears the whole list
 			this.todos = [];
-			this.notes = [];
 
 		},
 
