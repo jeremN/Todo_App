@@ -1,6 +1,7 @@
 var storageKey;
 
 var lStorage = {
+<<<<<<< HEAD
 
 	get: function(type) {
 
@@ -10,6 +11,17 @@ var lStorage = {
 
 			storageKey = ""+type+"App";
 			console.log(storageKey);
+=======
+	
+	get: function(el) {
+
+		var el = [],
+			this_str = localStorage.getItem(storageKey);
+
+		if ( this_str != null) {
+
+			el = JSON.parse(this_str);
+>>>>>>> e37640727fdb332f907301f559168290aaf41ad0
 
 			var todos = [],
 				todos_str = localStorage.getItem(storageKey);
@@ -38,6 +50,7 @@ var lStorage = {
 			return notes;
 		}*/
 
+<<<<<<< HEAD
 		var stored = type,
 			stored_str = localStorage.getItem(storageKey);
 
@@ -65,6 +78,15 @@ var lStorage = {
 			
 		}
 
+=======
+		return el;
+
+	},
+
+	save: function(el) {
+
+		localStorage.setItem( storageKey, JSON.stringify(el) );
+>>>>>>> e37640727fdb332f907301f559168290aaf41ad0
 
 	}
 
@@ -80,12 +102,19 @@ new Vue({
 	data: {
 
 		todos: lStorage.get("todos"),
+<<<<<<< HEAD
 		notes: lStorage.get("notes"),
 		newTodo: "",
 		newDate: "",
 		newNote: "",
 		todoList: {},
 		noteList: {}
+=======
+		newTodo: "",
+		newDate: "",
+		newCat: "",
+		todoList: {}
+>>>>>>> e37640727fdb332f907301f559168290aaf41ad0
 
 	},
 
@@ -127,15 +156,17 @@ new Vue({
 
 			var todo = this.newTodo.trim();
 			var tDate = this.newDate;
+			var tCat = this.newCat.trim();
 
 			//if todo is not an empty string
-			if ( todo ) {
+			if (todo) {
 
 				//Insert values in newTodo object
 				todoList = {
 
 					title: todo,
 					date: tDate,
+					category: tCat,
 					checked: false
 
 				};
@@ -146,9 +177,15 @@ new Vue({
 				//Reset newTodo to an empty string, so the input field is cleared
 				this.newTodo = "";
 				this.newDate = "";
+				this.newCat = "";
 
 				lStorage.save(todos);
+
+<<<<<<< HEAD
+				lStorage.save(todos);
 				console.log(todos);
+=======
+>>>>>>> e37640727fdb332f907301f559168290aaf41ad0
 			}
 
 		},
