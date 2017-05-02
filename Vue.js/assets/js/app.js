@@ -1,17 +1,6 @@
-var storageKey;
+var storageKey = "todoApp";
 
 var lStorage = {
-<<<<<<< HEAD
-
-	get: function(type) {
-
-		console.log(type);
-
-		/*if (type === "todos") {
-
-			storageKey = ""+type+"App";
-			console.log(storageKey);
-=======
 	
 	get: function(el) {
 
@@ -21,64 +10,9 @@ var lStorage = {
 		if ( this_str != null) {
 
 			el = JSON.parse(this_str);
->>>>>>> e37640727fdb332f907301f559168290aaf41ad0
-
-			var todos = [],
-				todos_str = localStorage.getItem(storageKey);
-
-			if (todos_str != null) {
-
-				todos = JSON.parse(todos_str);
-
-			}
-
-			return todos;
-		}
-		else if (type === "notes") {
-
-			storageKey = ""+type+"App";
-
-			var notes = [],
-				notes_str = localStorage.getItem(storageKey);
-
-			if (todos != null) {
-
-				notes = JSON.parse(notes_str);
-
-			}
-
-			return notes;
-		}*/
-
-<<<<<<< HEAD
-		var stored = type,
-			stored_str = localStorage.getItem(storageKey);
-
-		if (str != null) {
-
-			type = JSON.parse(str);
-		}
-
-		return 
-
-	},
-
-	save: function(type) {
-
-		if (type === "todos") {
-
-			storageKey = ""+type+"App";
-			localStorage.setItem( storageKey, JSON.stringify(todos) );
 
 		}
-		else if (type === "notes") {
 
-			storageKey = "noteApp";
-			localStorage.setItem( storageKey, JSON.stringify(notes) );
-			
-		}
-
-=======
 		return el;
 
 	},
@@ -86,7 +20,6 @@ var lStorage = {
 	save: function(el) {
 
 		localStorage.setItem( storageKey, JSON.stringify(el) );
->>>>>>> e37640727fdb332f907301f559168290aaf41ad0
 
 	}
 
@@ -96,25 +29,20 @@ var lStorage = {
 new Vue({
 
 	//Bind this instance to our container #todo-form
-	el: "#app",
+	el: "#todo",
 
 	//This is where we will register the values that hold the data for our application
 	data: {
 
 		todos: lStorage.get("todos"),
-<<<<<<< HEAD
-		notes: lStorage.get("notes"),
-		newTodo: "",
-		newDate: "",
-		newNote: "",
-		todoList: {},
-		noteList: {}
-=======
 		newTodo: "",
 		newDate: "",
 		newCat: "",
+		displayMenu: false,
+		displayAddTask: true,
+		displayCat: false,
+		displayTasks: false,
 		todoList: {}
->>>>>>> e37640727fdb332f907301f559168290aaf41ad0
 
 	},
 
@@ -144,6 +72,30 @@ new Vue({
 				return todo.checked;
 			
 			}) && this.todos.length > 0;
+
+		},
+
+		countChecked: function() {
+
+			var count = 0;
+
+			for( var i = 0; i < this.todos.length; i++ ) {
+
+				if( this.todos[i].checked === true){
+
+					count++;
+					console.log(count);	
+				
+				}
+			}
+
+			return count;
+
+		},
+
+		taskLeft: function() {
+
+				return this.todos.length - this.countChecked;
 
 		}
 
@@ -181,11 +133,6 @@ new Vue({
 
 				lStorage.save(todos);
 
-<<<<<<< HEAD
-				lStorage.save(todos);
-				console.log(todos);
-=======
->>>>>>> e37640727fdb332f907301f559168290aaf41ad0
 			}
 
 		},

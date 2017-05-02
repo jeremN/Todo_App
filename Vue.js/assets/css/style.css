@@ -43,19 +43,15 @@ textarea,
 #category,
 #menu-list 
 /*#add-form*/{
-    display: none;
 }
 
 #menu-list.open{
-    display: block;
 }
 
 #add-form.open{
-    display: block;
 }
 
 #task{
-    display: block;
 }
 
 /*MENU BTN*/
@@ -82,6 +78,7 @@ textarea,
     top: 0;
     left: 0; 
     text-align: center;
+    z-index: 999;
 }
 
     #menu-list li{

@@ -10,10 +10,10 @@
     <!--Font-->
     <link href="assets/bootstrap/fonts/glyphicons-halflings-regular.ttf">
 
-    <!-- Bootstrap -->
+    <!--Bootstrap -->
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!--My CSS-->
+    <!--CSS-->
     <link href="assets/css/style.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -29,109 +29,54 @@
     <!--Container-->
     <div id="todo" class="container">
 
-      <!--Add task
-      <div class="row">
-        
-        <form id="todo-form" class="panel col-md-10 col-md-offset-1">
-
-          <!-Select all todos->
-          <fieldset class="form-group">
-            <label for="markAll">Select all todos</label>>
-            <input id="markAll" type="checkbox" v-bind:checked="allSelected" v-on:click="selectAll">
-          </fieldset>
-          <!-./Select all todos->
-
-          <!-Task->
-          <fieldset class="form-group">
-            <label for="todo-title">Task</label>
-            <input id="todo-title" class="form-control" type="text" name="title" v-model="newTodo">
-          </fieldset>
-          <!-./Task->
-          <!-Date->
-          <fieldset class="form-group">
-            <label for="todo-date">Date</label>
-            <input id="todo-date" class="form-control" type="date" name="date" v-model="newDate">
-          </fieldset>
-          <!-./Date->
-
-          <!-Submit btn->
-          <button id="todoSubmit" class="btn btn-primary" v-on:click="addTodo">
-            Add Task
-          </button>
-          <!-./Submit btn->
-
-          <!-Clear todos btn->
-          <button id="todoClear" class="btn btn-primary" v-on:click="clearList">
-            Clear list
-          </button>
-          <!-./Clear todos btn->
-
-        </form>
-      </div>
-      <!-./Add task-->
-
-      <!--Task list
-      <div class="row">
-        <div class="list col-md-10 col-md-offset-1">
-          
-          <!-Todo item->
-          <div class='item' v-for="todo in todos" v-bind:class="{ done: todo.checked }">
-            <p class='item-date'>{{ todo.date }}</p>
-            <div class='item-content'>
-              <input type="checkbox" class='complete btn btn-default' v-model="todo.checked">
-              <h4>{{ todo.title }}</h4>
-
-              <!-Remove btn->
-              <div class='item-buttons'>
-                <button class='remove btn btn-default' v-on:click="removeTodo(todo)">
-                  <span class='glyphicon glyphicon-remove'></span>
-                </button>
-              </div>
-              <!-./Remove btn->
-            
-            </div>
-          </div>
-          <!-./Todo item->
-
-        </div>
-      </div>
-      <!-./Task list-->
-
       <div id="box" class="col-md-6 col-sm-12 col-md-offset-3">
         
         <!--Header-->
         <header id="head-box" class="row">
           <div class="col-md-10 col-sm-8">
+
             <h1>Accueil</h1>
+
             <div id="stat-box">
+
               <div class="stat-item">
                 <span class='glyphicon glyphicon-ok'></span>
-                <p id="done-count" class="counter"></p>
+                <p id="done-count" class="counter">{{ countChecked }}</p>
               </div>
+
               <div class="stat-item">
                 <span class='glyphicon glyphicon-hourglass'></span>
-                <p id="pending-count" class="counter"></p>
+                <p id="pending-count" class="counter">{{ taskLeft }}</p>
               </div>
+
             </div>
           </div>
-          <button id="burger-menu" class="btn btn-default col-md-2 col-sm-4">
+
+          <button id="burger-menu" class="btn btn-default col-md-2 col-sm-4" v-on:click="displayMenu = !displayMenu">
             <span class="glyphicon glyphicon-menu-hamburger"></span>
           </button>
+
         </header>
         <!--Header END-->
 
         <!--Nav-->
-        <nav id="menu-list" class="row">
+        <nav id="menu-list" class="row" v-if="displayMenu">
           <ul class="col-md-10 col-sm-12 col-md-offset-1">
-            <li><a href="#add-form" title="Ajouter une tâche">Ajouter une tâche</a></li>
-            <li><a href="#category" title="Catégorie">Categorie</a></li>
-            <li><a href="#task" title="Liste des tâches">Liste des tâches</a></li>
+            <li>
+              <a href="#add-form" title="Ajouter une tâche" v-on:click="displayAddTask = !displayAddTask">Ajouter une tâche</a>
+            </li>
+            <!--<li>
+              <a href="#category" title="Catégorie" v-on:click="displayCat = !displayCat">Categorie</a>
+            </li>-->
+            <li>
+              <a href="#task" title="Liste des tâches" v-on:click="displayTasks = !displayTasks">Liste des tâches</a>
+            </li>
           </ul>
         </nav>
         <!--Nav END-->
 
         <!--Add task Form-->
-        <div id="add-form" class="task-form row col-md-10 col-sm-12 col-md-offset-1">
+        <div id="add-form" class="task-form row col-md-10 col-sm-12 col-md-offset-1" v-if="displayAddTask">
 
           <div class="row">
             <h2>Ajouter une tâche</h2>
@@ -157,27 +102,27 @@
 
                 <div class="radiopills-purple">
                     <input type="radio" 
-                    name="category" value="personnel" id="radio1" class="todo-Category" />
+                    name="category" value="personnel" id="radio1" class="todo-Category" v-model="newCat"/>
                     <label class="todo-Category" value="Personnel" for="radio1">Personnel</label>
                 </div>
                 <div class="radiopills-blue">
                     <input type="radio" 
-                    name="category" value="travail" id="radio2" class="todo-Category" checked/>
+                    name="category" value="travail" id="radio2" class="todo-Category" v-model="newCat"/>
                     <label class="todo-Category" value="Travail" for="radio2">Travail</label>
                 </div>
                 <div class="radiopills-green">
                     <input type="radio" 
-                    name="category" value="maison" id="radio3" class="todo-Category" />
+                    name="category" value="maison" id="radio3" class="todo-Category" v-model="newCat"/>
                     <label class="todo-Category" value="Maison" for="radio3">Maison</label>
                 </div>
                 <div class="radiopills-yellow">
                     <input type="radio" 
-                    name="category" value="loisir" id="radio4" class="todo-Category" />
+                    name="category" value="loisir" id="radio4" class="todo-Category" v-model="newCat"/>
                     <label class="todo-Category" value="Loisir" for="radio4">Loisir</label>
                 </div>
                 <div class="radiopills-red">
                     <input type="radio" 
-                    name="category" value="banque" id="radio5" />
+                    name="category" value="banque" id="radio5" v-model="newCat"/>
                     <label class="todo-Category" value="Banque" for="radio5">Banque</label>
                 </div>
               </div>
@@ -191,7 +136,7 @@
 
         
         <!--Task-->
-        <div id="task" class="row col-md-10 col-sm-12 col-md-offset-1"> 
+        <div id="task" class="row col-md-10 col-sm-12 col-md-offset-1" v-if="displayTasks  && todos.length > 0"> 
 
           <!--Pending task-->
           <div id="task" class="row">
@@ -199,7 +144,7 @@
             <div id="task-list">
 
               <!--Todo item-->
-              <div class='todo-task personnal' v-for="todo in todos" v-bind:class="{ done: todo.checked }">
+              <div class='todo-task' v-for="todo in todos" v-bind:class="{ done: todo.checked }">
                 <p class='item-date'>{{ todo.date }}</p>
                 <div class='head'>
                   <input type="checkbox" class='complete btn btn-default' v-model="todo.checked">
@@ -229,8 +174,8 @@
         </div>
         <!--Task END-->
 
-        <!--Category-->
-        <div id="category" class="row col-md-10 col-sm-12 col-md-offset-1">
+        <!--Category->
+        <div id="category" class="row col-md-10 col-sm-12 col-md-offset-1" v-if="displayCat">
 
           <div id="activ-cat" class="row">
             
@@ -312,7 +257,7 @@
             </div>
           </div>
         </div>
-        <!--Category END-->
+        <!-Category END-->
 
       </div>
       <!--Box END-->
