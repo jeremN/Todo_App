@@ -38,10 +38,9 @@ new Vue({
 		newTodo: "",
 		newDate: "",
 		newCat: "",
-		displayMenu: false,
-		displayAddTask: true,
+		displayAddTask: false,
+		displayTasks: true,
 		displayCat: false,
-		displayTasks: false,
 		todoList: {}
 
 	},
@@ -84,7 +83,6 @@ new Vue({
 				if( this.todos[i].checked === true){
 
 					count++;
-					console.log(count);	
 				
 				}
 			}
@@ -96,6 +94,24 @@ new Vue({
 		taskLeft: function() {
 
 				return this.todos.length - this.countChecked;
+
+		}
+
+	},
+
+	filters: {
+
+		dateFormat: function(date) {
+
+			if( !date ){
+
+				return '';
+			}
+			else{
+
+				return moment( date, 'YYYY-MM-DD').format('DD/MM/YYYY');
+			
+			}
 
 		}
 
@@ -131,7 +147,7 @@ new Vue({
 				this.newDate = "";
 				this.newCat = "";
 
-				lStorage.save(todos);
+				lStorage.save(todo);
 
 			}
 

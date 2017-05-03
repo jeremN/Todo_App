@@ -52,28 +52,8 @@
             </div>
           </div>
 
-          <button id="burger-menu" class="btn btn-default col-md-2 col-sm-4" v-on:click="displayMenu = !displayMenu">
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
-          </button>
-
         </header>
         <!--Header END-->
-
-        <!--Nav-->
-        <nav id="menu-list" class="row" v-if="displayMenu">
-          <ul class="col-md-10 col-sm-12 col-md-offset-1">
-            <li>
-              <a href="#add-form" title="Ajouter une tâche" v-on:click="displayAddTask = !displayAddTask">Ajouter une tâche</a>
-            </li>
-            <!--<li>
-              <a href="#category" title="Catégorie" v-on:click="displayCat = !displayCat">Categorie</a>
-            </li>-->
-            <li>
-              <a href="#task" title="Liste des tâches" v-on:click="displayTasks = !displayTasks">Liste des tâches</a>
-            </li>
-          </ul>
-        </nav>
-        <!--Nav END-->
 
         <!--Add task Form-->
         <div id="add-form" class="task-form row col-md-10 col-sm-12 col-md-offset-1" v-if="displayAddTask">
@@ -82,11 +62,6 @@
             <h2>Ajouter une tâche</h2>
 
             <form id="todo-form">
-
-              <fieldset class="form-group">
-                <label for="markAll">Select all todos</label>
-                <input id="markAll" type="checkbox" v-bind:checked="allSelected" v-on:click="selectAll">
-              </fieldset>
 
               <fieldset class="form-group">
                 <label for="title">Task</label>
@@ -136,22 +111,30 @@
 
         
         <!--Task-->
-        <div id="task" class="row col-md-10 col-sm-12 col-md-offset-1" v-if="displayTasks  && todos.length > 0"> 
+        <div id="task" class="row col-md-10 col-sm-12 col-md-offset-1"> 
+
+          <div id="deleteAll" class="row">
+            <div class="radiopills-lightBlue">
+                <input type="radio" 
+                name="category" value="personnel" id="markAll" class="todo-Category" v-bind:checked="allSelected" v-on:click="selectAll"/>
+                <label class="todo-Category" value="selectAll" for="markAll">Marquer toutes les tâches</label>
+            </div>
+          </div>
 
           <!--Pending task-->
-          <div id="task" class="row">
+          <div id="task" class="row" v-if="todos.length > 0">
             <h2>Tâche en cours</h2>
             <div id="task-list">
 
               <!--Todo item-->
               <div class='todo-task' v-for="todo in todos" v-bind:class="{ done: todo.checked }">
-                <p class='item-date'>{{ todo.date }}</p>
+                <p class='item-date'>{{ todo.date | dateFormat }}</p>
                 <div class='head'>
-                  <input type="checkbox" class='complete btn btn-default' v-model="todo.checked">
-                  <h4>{{ todo.title }}</h4>
+                  <h4>{{ todo.title }}&nbsp;&nbsp;<small>{{ todo.category }}</small></h4>
 
                   <!--Remove btn-->
                   <div class='button'>
+                    <input type="checkbox" class='complete btn btn-default' v-model="todo.checked">
                     <button class='remove btn btn-default' v-on:click="removeTodo(todo)">
                       <span class='glyphicon glyphicon-remove'></span>
                     </button>
@@ -166,11 +149,24 @@
           </div>
           <!--Pending task END-->
           
+          <!--Task list is empty-->
+          <div class="no-task row" v-else-if="todos.length === 0">
+            <h2>La liste est vide</h2>
+          </div>
+          <!--Task list is empty END-->
+          
+          <!--Buttons-->
           <div class="row">
-            <button id="add-task" class="btn btn-default col-md-2 col-sm-4">
+            <button id="add-task" class="btn btn-default col-md-2 col-sm-4 round-button" v-on:click="displayAddTask = !displayAddTask">
               <span class="glyphicon glyphicon-plus"></span>
             </button>
+
+            <button id="show-category" class="btn btn-default col-md-2 col-sm-4 round-button" v-on:click="displaycat = !displayCat">
+              <span class="glyphicon glyphicon-th-large"></span>
+            </button>
           </div>
+          <!--Buttons END-->
+
         </div>
         <!--Task END-->
 
@@ -274,6 +270,9 @@
 
     <!--Bootstrap-->
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  
+    <!--Moment.js-->    
+    <script src="assets/js/moment.js"></script>
     
     <!--Vue.js-->
     <script src="https://unpkg.com/vue"></script>

@@ -40,35 +40,30 @@ textarea,
     background: none;
 }
 
-#category,
-#menu-list 
-/*#add-form*/{
-}
-
-#menu-list.open{
-}
-
-#add-form.open{
-}
-
-#task{
-}
-
 /*MENU BTN*/
-#add-task{
+.round-button{
     border-radius: 50%;
     border: 0;
     box-shadow: 6px 6px 14px -4px rgba(0, 0, 0, 0.2);
     background: #42eed3;
     width: 3rem;   
     height: 3rem;
-    margin-top: 1em;
+    margin: 1em 0.5em;
 }
     
-    #add-task .glyphicon{
+    .round-button .glyphicon{
         color: #fff;
         background: none;
+        left: 1px;
     }
+
+.glyphicon-hourglass{
+    color: #90d0ff;
+}
+
+.glyphicon-ok{
+    color: #98cd7a;
+}
 
 /*MENU LIST*/
 #menu-list{
@@ -109,6 +104,7 @@ RADIO INPUT STYLE
     width: 100%;
     font-weight: normal;
     font-size: 0.7em;
+    transition: all .25s ease-out;
 }
 
     .radiopills input[type="radio"]:empty, 
@@ -182,6 +178,14 @@ RADIO INPUT STYLE
     background-color: #beaaf1;
 }
 
+.radiopills-lightBlue input[type="radio"]:checked ~ label, 
+.radiopills-lightBlue input[type="checkbox"]:checked ~ label,
+.radiopills-lightBlue input[type="radio"]:checked ~ label:before, 
+.radiopills-lightBlue input[type="checkbox"]:checked ~ label:before {
+    color: #fff;
+    background-color: #48eed3;
+}
+
 .radiopills-blue input[type="radio"]:checked ~ label, 
 .radiopills-blue input[type="checkbox"]:checked ~ label,
 .radiopills-blue input[type="radio"]:checked ~ label:before, 
@@ -226,7 +230,8 @@ RADIO INPUT STYLE
 .radiopills-blue,
 .radiopills-green,
 .radiopills-red,
-.radiopills-yellow{
+.radiopills-yellow,
+.radiopills-lightBlue{
     display: inline-block;
     min-width: 6.5rem;
 }
@@ -243,6 +248,10 @@ RADIO INPUT STYLE
 }
 
 /*FORM*/
+#add-form{
+    padding: 2em 15px;
+}
+
 textarea.form-control{
     max-width: 450px;
     max-height: 120px;
@@ -312,6 +321,7 @@ textarea.form-control{
         background: #98cd7a;
     }
 
+
 #category figure{
     box-shadow: 6px 8px 14px 1px rgba(0, 0, 0, 0.2);
     margin: 1em auto;
@@ -353,44 +363,61 @@ textarea.form-control{
     }
 
 /*TASK*/
+#task{
+    padding: 2em 15px;
+}
+
 .todo-task{
-    margin: 1.5em auto;
+    margin: 3em auto 6em;
     background: #fff;
-    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.15);
 }
 
-    .todo-task .head h4{
+    .head{
+        position: relative;
+        top: -1em;
+        padding: 1em 0.25em;
+        background: #fff;
+        width: 100%;
         float: left;
-        width: 75%;
-    }
-
-    .todo-task.loisir{
-        border-right: 2px solid #fee489;
-    }
-    .todo-task.personnel{
-        border-right: 2px solid #beaaf1;
-    }
-    .todo-task.travail{
         border-right: 2px solid #90d0ff;
-    }
-    .todo-task.maison{
-        border-right: 2px solid #98cd7a;
-    }
-    .todo-task.default{
-        border-right: 2px solid #888;
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.15);
     }
 
-.button{
-    float: right;
-    width: 20%;
+        .todo-task .head h4{
+            float: left;
+            width: 75%;
+            margin: 0 0 0.5em;
+        }
+
+            .button{
+                float: right;
+                width: 20%;
+                position: relative;
+                top: -0.25em;
+            }
+
+            .item-date{
+                font-size: 0.75em;
+                position: relative;
+                top: -1.5em;
+                margin: 0; 
+            }
+
+            .btn.remove{
+                border: 0;
+                color: #526080;
+            }
+
+            .todo-task input{
+                margin: 0;
+            }
+
+.todo-task.done .head{
+    border-right: 2px solid #98cd7a;
 }
 
-.btn.complete,
-.btn.remove{
-    border: 0;
-}
+    .todo-task.done h4{
+        text-decoration: line-through;
+    }
 
 /*ADD TASK*/
-#add-form{
-
-}
