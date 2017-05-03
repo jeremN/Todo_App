@@ -41,7 +41,17 @@ new Vue({
 		displayAddTask: false,
 		displayTasks: true,
 		displayCat: false,
-		todoList: {}
+		todoList: {},
+		categories: [
+			
+			{ name: "personnel" },
+			{ name: "travail" },
+			{ name: "loisir" },
+			{ name: "maison" },
+			{ name: "course" },
+			{ name: "banque" }
+
+		]
 
 	},
 
@@ -78,6 +88,7 @@ new Vue({
 
 			var count = 0;
 
+			//For loop to count todos checked, add +1 to count
 			for( var i = 0; i < this.todos.length; i++ ) {
 
 				if( this.todos[i].checked === true){
@@ -87,12 +98,14 @@ new Vue({
 				}
 			}
 
+			//return count value
 			return count;
 
 		},
 
 		taskLeft: function() {
 
+				//return task not done (total task - task done)
 				return this.todos.length - this.countChecked;
 
 		}
@@ -105,14 +118,20 @@ new Vue({
 
 			if( !date ){
 
+				//If no date value, return empty string
 				return '';
 			}
 			else{
 
+				//Else, format date from Y/M/D to D/M/Y
 				return moment( date, 'YYYY-MM-DD').format('DD/MM/YYYY');
 			
 			}
 
+		},
+
+		sortBy: function(category) {
+			
 		}
 
 	},
@@ -153,7 +172,8 @@ new Vue({
 
 		},
 
-		removeTodo: function(todo) {
+		removeElement: function(todos) {
+
 
 			//Grab the index of this task and use splice() array method to delete it from the array
 			var index = this.todos.indexOf(todo);
@@ -179,6 +199,11 @@ new Vue({
 				this.todos[i].checked = targetValue;
 
 			}
+
+		},
+
+		showTasks: function(event) {
+
 
 		}
 

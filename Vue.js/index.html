@@ -60,9 +60,10 @@
 
           <div class="row">
             <h2>Ajouter une tâche</h2>
-
+            
+            <!--Add task form-->
             <form id="todo-form">
-
+  
               <fieldset class="form-group">
                 <label for="title">Task</label>
                 <input id="todo-Title" class="form-control" name="title" v-model="newTodo" required>
@@ -72,62 +73,49 @@
                 <label for="date">Date</label>
                 <input id="todo-Date" class="form-control" name="date" type="date" v-model="newDate"/>
               </fieldset>
-
+  
+              <!--Input Radio Pills-->
               <div class="radiopills radiopills-container">
+                
+                <!--Pills wrapper-->
+                <div class="radiopills-wrap">
+                  
+                  <!--Pills items-->
+                  <div class="radiopills-item" v-for="(cat, index ) in categories" v-bind:class="cat.name">
 
-                <div class="radiopills-purple">
-                    <input type="radio" 
-                    name="category" value="personnel" id="radio1" class="todo-Category" v-model="newCat"/>
-                    <label class="todo-Category" value="Personnel" for="radio1">Personnel</label>
+                      <input type="radio" 
+                      name="category" value="personnel"  v-bind:id="index" class="todo-Category" v-model="newCat" v-bind:value="cat.name"/>
+                      <label class="todo-Category" value="Personnel" v-bind:for="index">{{ cat.name }}</label>
+
+                  </div>
+                  <!--Pills items END-->
+
                 </div>
-                <div class="radiopills-blue">
-                    <input type="radio" 
-                    name="category" value="travail" id="radio2" class="todo-Category" v-model="newCat"/>
-                    <label class="todo-Category" value="Travail" for="radio2">Travail</label>
-                </div>
-                <div class="radiopills-green">
-                    <input type="radio" 
-                    name="category" value="maison" id="radio3" class="todo-Category" v-model="newCat"/>
-                    <label class="todo-Category" value="Maison" for="radio3">Maison</label>
-                </div>
-                <div class="radiopills-yellow">
-                    <input type="radio" 
-                    name="category" value="loisir" id="radio4" class="todo-Category" v-model="newCat"/>
-                    <label class="todo-Category" value="Loisir" for="radio4">Loisir</label>
-                </div>
-                <div class="radiopills-red">
-                    <input type="radio" 
-                    name="category" value="banque" id="radio5" v-model="newCat"/>
-                    <label class="todo-Category" value="Banque" for="radio5">Banque</label>
-                </div>
+                <!--Pills wrapper END-->
+
               </div>
+              <!--Input Radio Pills END-->
 
               <input id="todo-submit" class="btn btn-primary btn-submit" type="submit" value="Ajouter une tâche" v-on:click="addTodo"/>
 
             </form>
+            <!--Add task form END-->
+
           </div>
         </div>
         <!--Add task form END-->
 
         
         <!--Task-->
-        <div id="task" class="row col-md-10 col-sm-12 col-md-offset-1"> 
-
-          <div id="deleteAll" class="row">
-            <div class="radiopills-lightBlue">
-                <input type="radio" 
-                name="category" value="personnel" id="markAll" class="todo-Category" v-bind:checked="allSelected" v-on:click="selectAll"/>
-                <label class="todo-Category" value="selectAll" for="markAll">Marquer toutes les tâches</label>
-            </div>
-          </div>
-
+        <div id="task" class="row col-md-10 col-sm-12 col-md-offset-1" v-if="displayTasks"> 
+          
           <!--Pending task-->
           <div id="task" class="row" v-if="todos.length > 0">
             <h2>Tâche en cours</h2>
             <div id="task-list">
 
               <!--Todo item-->
-              <div class='todo-task' v-for="todo in todos" v-bind:class="{ done: todo.checked }">
+              <div class='todo-task' v-for="todo in todos" v-bind:class="[{ done: todo.checked }, todo.category]">
                 <p class='item-date'>{{ todo.date | dateFormat }}</p>
                 <div class='head'>
                   <h4>{{ todo.title }}&nbsp;&nbsp;<small>{{ todo.category }}</small></h4>
@@ -135,7 +123,7 @@
                   <!--Remove btn-->
                   <div class='button'>
                     <input type="checkbox" class='complete btn btn-default' v-model="todo.checked">
-                    <button class='remove btn btn-default' v-on:click="removeTodo(todo)">
+                    <button class='remove btn btn-default' v-on:click="removeElement(todo)">
                       <span class='glyphicon glyphicon-remove'></span>
                     </button>
                   </div>
@@ -161,99 +149,52 @@
               <span class="glyphicon glyphicon-plus"></span>
             </button>
 
-            <button id="show-category" class="btn btn-default col-md-2 col-sm-4 round-button" v-on:click="displaycat = !displayCat">
+            <button id="show-category" class="btn btn-default col-md-2 col-sm-4 round-button" v-on:click="displayCat = !displayCat">
               <span class="glyphicon glyphicon-th-large"></span>
             </button>
+
+                      <!--Delete all-->
+          <div id="deleteAll" class="col-md-8 col-sm-12">
+            <div class="radiopills-lightBlue">
+                <input type="radio" 
+                name="category" value="personnel" id="markAll" class="todo-Category" v-bind:checked="allSelected" v-on:click="selectAll"/>
+                <label class="todo-Category" value="selectAll" for="markAll">Marquer toutes les tâches</label>
+            </div>
+          </div>
+          <!--Delete all END-->
+
           </div>
           <!--Buttons END-->
 
         </div>
         <!--Task END-->
 
-        <!--Category->
+        <!--Category-->
         <div id="category" class="row col-md-10 col-sm-12 col-md-offset-1" v-if="displayCat">
 
           <div id="activ-cat" class="row">
             
-          <h2>Catégories</h2>
+            <h2>Catégories</h2>
+
+            <!--Item wrapper-->
             <div id="task-category">
-          
-              <figure class="col-xs-5">
-                <a href="" title="">
-                  <span></span>
+              
+              <!--Category item-->
+              <figure class="col-xs-5"  v-for="category in categories" v-bind:class="category.name">
+                <a v-bind:href="category.name" title="">
                   <figcaption>
-                    <h4>
-                      <span class="glyphicon purple glyphicon-user"></span>
-                      <br>Personnel
-                    </h4>
-                    <p>54 tâches</p>
+                    <h4>{{ category.name }}</h4>
                   </figcaption>
                 </a>
               </figure>
-              <figure class="col-xs-5">
-                <a href="" title="">
-                  <span></span>
-                  <figcaption>
-                    <h4>
-                      <span class="glyphicon blue glyphicon-briefcase"></span>
-                      <br>Travail
-                    </h4>
-                    <p>54 tâches</p>
-                  </figcaption>
-                </a>
-              </figure>
-              <figure class="col-xs-5">
-                <a href="" title="">
-                  <span></span>
-                  <figcaption>
-                    <h4>
-                      <span class="glyphicon green glyphicon-home"></span>
-                      <br>Maison
-                    </h4>
-                    <p>54 tâches</p>
-                  </figcaption>
-                </a>
-              </figure>
-              <figure class="col-xs-5">
-                <a href="" title="">
-                  <span></span>
-                  <figcaption>
-                    <h4>
-                      <span class="glyphicon yellow glyphicon-tent"></span>
-                      <br>Loisir
-                    </h4>
-                    <p>54 tâches</p>
-                  </figcaption>
-                </a>
-              </figure>
-              <figure class="col-xs-5">
-                <a href="" title="">
-                  <span></span>
-                  <figcaption>
-                    <h4>
-                      <span class="glyphicon red glyphicon-euro"></span>
-                      <br>Banque
-                    </h4>
-                    <p>54 tâches</p>
-                  </figcaption>
-                </a>
-              </figure>
-              <figure class="col-xs-5 add-cat_button">
-                <a href="" title="">
-                  <span></span>
-                  <figcaption>
-                    <h4>
-                      <span class=" glyphicon glyphicon-plus"></span>
-                    </h4>
-                    <h5>Ajouter une catégorie</h5>
-                  </figcaption>
-                </a>
-              </figure>
+              <!--Category item END-->
 
             </div>
+            <!--Item wrapper END-->
+
           </div>
         </div>
-        <!-Category END-->
+        <!--Category END-->
 
       </div>
       <!--Box END-->

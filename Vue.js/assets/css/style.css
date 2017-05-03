@@ -57,14 +57,6 @@ textarea,
         left: 1px;
     }
 
-.glyphicon-hourglass{
-    color: #90d0ff;
-}
-
-.glyphicon-ok{
-    color: #98cd7a;
-}
-
 /*MENU LIST*/
 #menu-list{
     width: 100%;
@@ -95,25 +87,44 @@ RADIO INPUT STYLE
     height: 4.5em;
     display:  block;
 }
+    
+    .radiopills-container .radiopills-item{
+        float: left;
+    }
 
-.radiopills > div{
-    float: left;
+    .radiopills-container::-webkit-scrollbar-track{
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+    }
+
+    .radiopills-container::-webkit-scrollbar{
+        height: 2px;
+        background-color: #ccc;
+    }
+
+    .radiopills-container::-webkit-scrollbar-thumb{
+        background-color: #526080;
+        border: 1px solid #555555;
+    }
+
+.radiopills-wrap{
+    min-width: 2000px;
 }
 
-.radiopills label {
+.radiopills-item label {
     width: 100%;
     font-weight: normal;
     font-size: 0.7em;
     transition: all .25s ease-out;
 }
 
-    .radiopills input[type="radio"]:empty, 
-    .radiopills input[type="checkbox"]:empty {
+    .radiopills-item input[type="radio"]:empty, 
+    .radiopills-item input[type="checkbox"]:empty {
         display: none;
     }
 
-        .radiopills input[type="radio"]:empty ~ label, 
-        .radiopills input[type="checkbox"]:empty ~ label {
+        .radiopills-item input[type="radio"]:empty ~ label, 
+        .radiopills-item input[type="checkbox"]:empty ~ label {
             position: relative;
             line-height: 2.5em;
             text-indent: 3.25em;
@@ -126,8 +137,8 @@ RADIO INPUT STYLE
             transition: all ease-in 0.25s;
         }
 
-            .radiopills input[type="radio"]:empty ~ label:before,
-            .radiopills input[type="checkbox"]:empty ~ label:before {
+            .radiopills-item input[type="radio"]:empty ~ label:before,
+            .radiopills-item input[type="checkbox"]:empty ~ label:before {
                 position: absolute;
                 display: block;
                 top: 0;
@@ -139,26 +150,26 @@ RADIO INPUT STYLE
                 text-indent: .9em;
             }
 
-    .radiopills input[type="radio"]:hover:not(:checked) ~ label, 
-    .radiopills input[type="checkbox"]:hover:not(:checked) ~ label {
+    .radiopills-item input[type="radio"]:hover:not(:checked) ~ label, 
+    .radiopills-item input[type="checkbox"]:hover:not(:checked) ~ label {
         color: #888;
     }
 
-        .radiopills input[type="radio"]:hover:not(:checked) ~ label:before, 
-        .radiopills input[type="checkbox"]:hover:not(:checked) ~ label:before {
+        .radiopills-item input[type="radio"]:hover:not(:checked) ~ label:before, 
+        .radiopills-item input[type="checkbox"]:hover:not(:checked) ~ label:before {
             content:'\25CF';
             text-indent: .9em;
             color: #C2C2C2;
         }
 
-    .radiopills input[type="radio"]:checked ~ label, 
-    .radiopills input[type="checkbox"]:checked ~ label {
+    .radiopills-item input[type="radio"]:checked ~ label, 
+    .radiopills-item input[type="checkbox"]:checked ~ label {
         color: #777;
         box-shadow: 6px 6px 14px -4px rgba(0, 0, 0, 0.2);
     }
 
-        .radiopills input[type="radio"]:checked ~ label:before, 
-        .radiopills input[type="checkbox"]:checked ~ label:before {
+        .radiopills-item input[type="radio"]:checked ~ label:before, 
+        .radiopills-item input[type="checkbox"]:checked ~ label:before {
             content:'\25CF';
             text-indent: .9em;
             color: #333;
@@ -170,68 +181,63 @@ RADIO INPUT STYLE
         box-shadow: 0 0 0 3px #999;
     }
 
-.radiopills-purple input[type="radio"]:checked ~ label, 
-.radiopills-purple input[type="checkbox"]:checked ~ label,
-.radiopills-purple input[type="radio"]:checked ~ label:before, 
-.radiopills-purple input[type="checkbox"]:checked ~ label:before {
+.radiopills-item.personnel input[type="radio"]:checked ~ label, 
+.radiopills-item.personnel input[type="checkbox"]:checked ~ label,
+.radiopills-item.personnel input[type="radio"]:checked ~ label:before, 
+.radiopills-item.personnel input[type="checkbox"]:checked ~ label:before {
     color: #fff;
     background-color: #beaaf1;
 }
 
-.radiopills-lightBlue input[type="radio"]:checked ~ label, 
-.radiopills-lightBlue input[type="checkbox"]:checked ~ label,
-.radiopills-lightBlue input[type="radio"]:checked ~ label:before, 
-.radiopills-lightBlue input[type="checkbox"]:checked ~ label:before {
+.radiopills-item.course input[type="radio"]:checked ~ label, 
+.radiopills-item.course input[type="checkbox"]:checked ~ label,
+.radiopills-item.course input[type="radio"]:checked ~ label:before, 
+.radiopills-item.course input[type="checkbox"]:checked ~ label:before {
     color: #fff;
     background-color: #48eed3;
 }
 
-.radiopills-blue input[type="radio"]:checked ~ label, 
-.radiopills-blue input[type="checkbox"]:checked ~ label,
-.radiopills-blue input[type="radio"]:checked ~ label:before, 
-.radiopills-blue input[type="checkbox"]:checked ~ label:before {
+.radiopills-item.travail input[type="radio"]:checked ~ label, 
+.radiopills-item.travail input[type="checkbox"]:checked ~ label,
+.radiopills-item.travail input[type="radio"]:checked ~ label:before, 
+.radiopills-item.travail input[type="checkbox"]:checked ~ label:before {
     color: #fff;
     background-color: #90d0ff;
 }
 
-.radiopills-green input[type="radio"]:checked ~ label, 
-.radiopills-green input[type="checkbox"]:checked ~ label,
-.radiopills-green input[type="radio"]:checked ~ label:before, 
-.radiopills-green input[type="checkbox"]:checked ~ label:before {
+.radiopills-item.maison input[type="radio"]:checked ~ label, 
+.radiopills-item.maison input[type="checkbox"]:checked ~ label,
+.radiopills-item.maison input[type="radio"]:checked ~ label:before, 
+.radiopills-item.maison input[type="checkbox"]:checked ~ label:before {
     color: #fff;
     background-color: #98cd7a;
 }
 
-.radiopills-yellow input[type="radio"]:checked ~ label, 
-.radiopills-yellow input[type="checkbox"]:checked ~ label,
-.radiopills-yellow input[type="radio"]:checked ~ label:before, 
-.radiopills-yellow input[type="checkbox"]:checked ~ label:before {
+.radiopills-item.loisir input[type="radio"]:checked ~ label, 
+.radiopills-item.loisir input[type="checkbox"]:checked ~ label,
+.radiopills-item.loisir input[type="radio"]:checked ~ label:before, 
+.radiopills-item.loisir input[type="checkbox"]:checked ~ label:before {
     color: #fff;
     background-color: #fee489;
 }
-.radiopills-red input[type="radio"]:checked ~ label, 
-.radiopills-red input[type="checkbox"]:checked ~ label,
-.radiopills-red input[type="radio"]:checked ~ label:before, 
-.radiopills-red input[type="checkbox"]:checked ~ label:before {
+.radiopills-item.banque input[type="radio"]:checked ~ label, 
+.radiopills-item.banque input[type="checkbox"]:checked ~ label,
+.radiopills-item.banque input[type="radio"]:checked ~ label:before, 
+.radiopills-item.banque input[type="checkbox"]:checked ~ label:before {
     color: #fff;
     background-color: #f45e7d;
 }
 
-.radiopills-default input[type="radio"]:checked ~ label, 
-.radiopills-default input[type="checkbox"]:checked ~ label,
-.radiopills-default input[type="radio"]:checked ~ label:before, 
-.radiopills-default input[type="checkbox"]:checked ~ label:before {
+.radiopills-item.default input[type="radio"]:checked ~ label, 
+.radiopills-item.default input[type="checkbox"]:checked ~ label,
+.radiopills-item.default input[type="radio"]:checked ~ label:before, 
+.radiopills-item.default input[type="checkbox"]:checked ~ label:before {
     color: #fff;
     background-color: #5bc0de;
 }
 /*END RADIO INPUT STYLE*/
 
-.radiopills-purple,
-.radiopills-blue,
-.radiopills-green,
-.radiopills-red,
-.radiopills-yellow,
-.radiopills-lightBlue{
+.radiopills-item{
     display: inline-block;
     min-width: 6.5rem;
 }
@@ -326,6 +332,7 @@ textarea.form-control{
     box-shadow: 6px 8px 14px 1px rgba(0, 0, 0, 0.2);
     margin: 1em auto;
     padding: 1em 0;
+    border-top: 2px solid #fff;
 }
     #category figure:nth-child(2n){
         margin-left: 16.6667%;
@@ -342,6 +349,8 @@ textarea.form-control{
 
     #category figure h4{
         margin-bottom: 0.5em;
+        text-transform: capitalize;
+
     }
 
     #category figcaption{
@@ -362,6 +371,22 @@ textarea.form-control{
         padding: 1em 0 2.4em;
     }
 
+.todo-task.loisir .head{border-right-color: #fee489;}
+.todo-task.maison .head{border-right-color: #98cd7a;}
+.todo-task.travail .head{border-right-color: #90d0ff;}
+.todo-task.personnel .head{border-right-color: #beaaf1;}
+.todo-task.banque .head{border-right-color: #f45e7d;}
+.todo-task.course .head{border-right-color: #c492b1;}
+.todo-task.default .head{border-right-color: #5bc0de;}
+
+#category figure.personnel{border-top-color: #beaaf1;}
+#category figure.loisir{border-top-color: #fee489;}
+#category figure.maison{border-top-color: #98cd7a;}
+#category figure.travail{border-top-color: #90d0ff;}
+#category figure.banque{border-top-color: #f45e7d;}
+#category figure.course{border-top-color: #c492b1;}
+#category figure.default{border-top-color: #5bc0de;}
+
 /*TASK*/
 #task{
     padding: 2em 15px;
@@ -379,7 +404,7 @@ textarea.form-control{
         background: #fff;
         width: 100%;
         float: left;
-        border-right: 2px solid #90d0ff;
+        border-right: 2px solid #fff;
         box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.15);
     }
 
@@ -388,6 +413,12 @@ textarea.form-control{
             width: 75%;
             margin: 0 0 0.5em;
         }
+
+            .todo-task .head h4 small{
+                float: right;
+                font-size: 60%;
+                line-height: 1.85;
+            }
 
             .button{
                 float: right;
@@ -412,12 +443,21 @@ textarea.form-control{
                 margin: 0;
             }
 
-.todo-task.done .head{
-    border-right: 2px solid #98cd7a;
+.todo-task.loisir .head{border-right-color: #fee489;}
+.todo-task.maison .head{border-right-color: #98cd7a;}
+.todo-task.travail .head{border-right-color: #90d0ff;}
+.todo-task.personnel .head{border-right-color: #beaaf1;}
+.todo-task.banque .head{border-right-color: #f45e7d;}
+
+.todo-task.done .head{border-right-color: #526080;
 }
 
     .todo-task.done h4{
         text-decoration: line-through;
     }
+
+#deleteAll{
+    margin-top: 1.85em;
+}
 
 /*ADD TASK*/
