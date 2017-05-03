@@ -331,7 +331,6 @@ textarea.form-control{
 #category figure{
     box-shadow: 6px 8px 14px 1px rgba(0, 0, 0, 0.2);
     margin: 1em auto;
-    padding: 1em 0;
     border-top: 2px solid #fff;
 }
     #category figure:nth-child(2n){
@@ -340,6 +339,9 @@ textarea.form-control{
 
     #category figure a{
         color: #526080;
+        padding: 1em 0;
+        display: block;
+        cursor: pointer;
     }
         #category figure a:hover,
         #category figure a:focus,
@@ -348,7 +350,6 @@ textarea.form-control{
         }
 
     #category figure h4{
-        margin-bottom: 0.5em;
         text-transform: capitalize;
 
     }

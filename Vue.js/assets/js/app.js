@@ -1,3 +1,4 @@
+/*LocalStorage*/
 var storageKey = "todoApp";
 
 var lStorage = {
@@ -25,6 +26,8 @@ var lStorage = {
 
 };
 
+
+/*Vue*/
 //Create new Vue instance
 new Vue({
 
@@ -41,6 +44,7 @@ new Vue({
 		displayAddTask: false,
 		displayTasks: true,
 		displayCat: false,
+		visibility: 'all',
 		todoList: {},
 		categories: [
 			
@@ -89,9 +93,9 @@ new Vue({
 			var count = 0;
 
 			//For loop to count todos checked, add +1 to count
-			for( var i = 0; i < this.todos.length; i++ ) {
+			for ( var i = 0; i < this.todos.length; i++ ) {
 
-				if( this.todos[i].checked === true){
+				if ( this.todos[i].checked === true) {
 
 					count++;
 				
@@ -108,6 +112,25 @@ new Vue({
 				//return task not done (total task - task done)
 				return this.todos.length - this.countChecked;
 
+		},
+
+		filteredTodos: function() {
+
+			if ( this.visibility !== 'all' ) {
+
+				return this.todos.filter( function(todo){
+					
+						return todo.category.match(this.visibility);
+
+				});
+
+			}
+			else{
+
+				return this.todos;
+
+			}
+
 		}
 
 	},
@@ -116,22 +139,19 @@ new Vue({
 
 		dateFormat: function(date) {
 
-			if( !date ){
+			if ( !date ) {
 
 				//If no date value, return empty string
 				return '';
+
 			}
-			else{
+			else {
 
 				//Else, format date from Y/M/D to D/M/Y
 				return moment( date, 'YYYY-MM-DD').format('DD/MM/YYYY');
 			
 			}
 
-		},
-
-		sortBy: function(category) {
-			
 		}
 
 	},
@@ -202,8 +222,9 @@ new Vue({
 
 		},
 
-		showTasks: function(event) {
+		filterTodos: function(filter){
 
+			this.visibility = filter;
 
 		}
 

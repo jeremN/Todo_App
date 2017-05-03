@@ -115,7 +115,7 @@
             <div id="task-list">
 
               <!--Todo item-->
-              <div class='todo-task' v-for="todo in todos" v-bind:class="[{ done: todo.checked }, todo.category]">
+              <div class='todo-task' v-for="todo in filteredTodos" v-bind:class="[{ done: todo.checked }, todo.category]">
                 <p class='item-date'>{{ todo.date | dateFormat }}</p>
                 <div class='head'>
                   <h4>{{ todo.title }}&nbsp;&nbsp;<small>{{ todo.category }}</small></h4>
@@ -181,7 +181,7 @@
               
               <!--Category item-->
               <figure class="col-xs-5"  v-for="category in categories" v-bind:class="category.name">
-                <a v-bind:href="category.name" title="">
+                <a v-bind:title="category.name" v-on:click="filterTodos(category.name)">
                   <figcaption>
                     <h4>{{ category.name }}</h4>
                   </figcaption>
