@@ -26,6 +26,23 @@ var lStorage = {
 
 };
 
+/*Filters*/
+var filters = {
+
+	all: function(todos) {
+		
+		return todos;
+	
+	},
+
+	cat: function(todos, visibility) {
+
+		return todos.filter( function(todo) {
+
+			return todo.category.match(visibility);
+		});
+	}
+};
 
 /*Vue*/
 //Create new Vue instance
@@ -44,7 +61,7 @@ new Vue({
 		displayAddTask: false,
 		displayTasks: true,
 		displayCat: false,
-		visibility: 'all',
+		visibility: 'tout',
 		todoList: {},
 		categories: [
 			
@@ -53,7 +70,8 @@ new Vue({
 			{ name: "loisir" },
 			{ name: "maison" },
 			{ name: "course" },
-			{ name: "banque" }
+			{ name: "banque" },
+			{ name: "tout" }
 
 		]
 
@@ -71,7 +89,7 @@ new Vue({
 			//To detect nested values inside objects
 			deep: true
 
-		}
+		},
 
 	},
 
@@ -116,13 +134,10 @@ new Vue({
 
 		filteredTodos: function() {
 
-			if ( this.visibility !== 'all' ) {
 
-				return this.todos.filter( function(todo){
-					
-						return todo.category.match(this.visibility);
+			if ( this.visibility !== 'tout' ) {
 
-				});
+				return filters.cat(this.todos, this.visibility);
 
 			}
 			else{
